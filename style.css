@@ -1,0 +1,91 @@
+@charset "utf-8";
+
+body{
+  background-image: url(image_background5.jpg);
+  background-size: 140%;
+}
+
+header{
+  height: 640px;
+  background: url(member2.png) center/cover;
+}
+
+h1{
+  margin: 0;
+  font-size: 160px;
+  color: white;
+  font-weight: bold;
+  font-family: serif;
+  text-align: center;
+  line-height: 640px;
+  opacity: 0.7;
+}
+
+.profile{
+   font-family: "ヒラギノ角ゴ ProN W6";
+   line-height: 32px;
+}
+
+.music{
+   padding: 10px;
+   font-family: "ヒラギノ角ゴ ProN W6";
+   font-size: 20px;
+   font-weight: bold;
+   background: rgb(210, 253, 227);
+   margin: 40px 0 32px 0;
+}
+
+.image-music{
+  width: 200px;
+  height: auto;
+  margin: 0 80px;
+  text-align: left;
+  font-size: 16px;
+}
+
+ul{
+  display: flex;
+  overflow-x: scroll;
+}
+
+.live-image{
+  display: inline-block;
+  vertical-align: text-bottom;
+}
+
+.live-font{
+  display: inline-block;
+  width: 400px;
+  margin-left: 15px;
+}
+
+.p-member{
+   padding: 10px;
+   font-family: "ヒラギノ角ゴ ProN W6";
+   font-size: 20px;
+   font-weight: bold;
+   background: pink;
+}
+
+.live{
+   padding: 10px;
+   font-family: "ヒラギノ角ゴ ProN W6";
+   font-size: 20px;
+   font-weight: bold;
+   background: rgb(247, 164, 255);
+}
+
+.p-name{
+  font-family: "ヒラギノ角ゴ ProN W6";
+}
+
+.memberprof{
+  margin: 0 0 8px 20%;
+  text-align: left;
+  /* font-family: "MS Mincho"; */
+  font-size: 12px;
+}
+
+.copylight{
+  font-size: 12px;
+}
