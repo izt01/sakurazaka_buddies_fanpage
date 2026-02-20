@@ -77,3 +77,58 @@ body { margin: 0; background-size: cover; background-position: center; }
   .live-text{ font-size: 12px; }
   .live-text h2{ font-size: 15px; }
 }
+
+/* ===== Member 表（table）をスマホで折り返し表示 ===== */
+.memberprof table{
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.memberprof td{
+  vertical-align: top;
+}
+
+/* スマホ：tableの行を折り返しできる“箱”として扱う */
+@media (max-width: 768px){
+  .memberprof table,
+  .memberprof tbody{
+    display: block;
+    width: 100%;
+  }
+
+  .memberprof tr{
+    display: flex;
+    flex-wrap: wrap;   /* ← 折り返し */
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .memberprof td{
+    display: block;
+    width: calc(50% - 6px);  /* 2列にする（gapの分だけ引く） */
+    padding: 8px;
+  }
+
+  /* inline style の margin を上書きして揃える */
+  .memberprof td img{
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 0 !important;   /* ← ここ重要 */
+    border-radius: 10px;
+  }
+
+  .memberprof td p,
+  .memberprof td div{
+    margin: 8px 0 0 0 !important;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+}
+
+/* もっと小さいスマホ：1列にする */
+@media (max-width: 420px){
+  .memberprof td{
+    width: 100%;
+  }
+}
