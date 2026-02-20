@@ -260,43 +260,47 @@ ul{
   }
 }
 
-/* ===== Live：スマホだけ“切れない”ようにする ===== */
+/* ===== Live：スマホは3Dを無効化して通常レイアウトにする ===== */
 @media (max-width: 768px){
 
-  /* 3Dカード自体を“可変高さ”にする */
   .live-3d-wrapper{
     width: 92%;
-    height: auto;          /* ← 350px固定を解除 */
+    height: auto;
     margin: 20px auto;
+    perspective: none;
   }
 
-  /* faceの高さ固定が切れの原因なので解除 */
+  .live-3d-box{
+    height: auto;
+    position: static;
+    transform: none !important;
+  }
+
   .live-face{
-    height: auto;          /* ← ここが重要 */
-    min-height: 0;
-    overflow: visible;     /* ← 文字が切れない */
+    position: static;
+    height: auto;
+    overflow: visible;
   }
 
-  /* 中身：横並び → 縦並び */
   .live-content{
+    display: flex;
     flex-direction: column;
-    height: auto;          /* ← 100%を解除 */
+    height: auto;
     gap: 14px;
   }
 
-  /* 画像：高さ100%を解除して幅いっぱいに */
   .live-content img{
     width: 100%;
     max-width: 100%;
-    height: auto;          /* ← 100%を解除 */
-    object-fit: cover;
+    height: auto;
+    object-fit: cover; /* トリミングOKならcover、欠けたくないならcontain */
   }
 
-  /* 文字：読みやすく */
   .live-text{
     font-size: 12px;
     line-height: 1.8;
   }
+
   .live-text h2{
     font-size: 16px;
   }
