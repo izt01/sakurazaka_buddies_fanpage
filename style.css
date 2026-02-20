@@ -226,24 +226,36 @@ ul{
 
 /* ===== スマホ：メンバーの“名前エリア”の高さを揃える ===== */
 @media (max-width: 768px){
-  /* 画像の下のテキスト（a/p/div）を同じ箱として扱う */
-  .memberprof td{
-    display: flex;
-    flex-direction: column;
+
+  .memberprof table{
+    display: block;
+    width: 100%;
   }
 
-  /* 名前ブロックの高さを固定（ここがポイント） */
+  .memberprof tr{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .memberprof td{
+    width: 48%;           /* ← 常に2列固定 */
+    margin-bottom: 20px;
+  }
+
+  .memberprof td img{
+    width: 100%;
+    aspect-ratio: 3 / 4;  /* 全員同じ比率 */
+    object-fit: cover;
+    margin: 0 !important;
+    border-radius: 10px;
+  }
+
   .memberprof td p,
   .memberprof td a,
   .memberprof td div{
-    display: block;
-    min-height: 3.6em;     /* 2行分くらい（必要なら増やす） */
-    line-height: 1.8;
-    margin: 8px 0 0 0 !important;
-  }
-
-  /* リンクの見た目調整（任意） */
-  .memberprof td a{
-    text-decoration: underline;
+    margin-top: 8px !important;
+    font-size: 14px;
+    line-height: 1.6;
   }
 }
