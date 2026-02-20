@@ -265,8 +265,8 @@ ul{
 
   .live-3d-wrapper{
     width: 92%;
-    height: 420px;      /* 350→少し増やす */
-    margin: 20px auto;
+    height: 460px;      /* 350→少し増やす */
+    margin: 20px auto 40px auto;;
     perspective: 1200px; /* 任意：少し弱めて見やすく */
   }
 
@@ -277,7 +277,7 @@ ul{
   }
 
   .live-face{
-    height: 420px;       /* wrapperと同じに */
+    height: 460px;       /* wrapperと同じに */
     overflow: hidden;    /* 外に漏らさない */
   }
 
