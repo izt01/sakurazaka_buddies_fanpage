@@ -265,38 +265,37 @@ ul{
 
   .live-3d-wrapper{
     width: 92%;
-    height: auto;
+    height: 420px;      /* 350→少し増やす */
     margin: 20px auto;
-    perspective: none;
+    perspective: 1200px; /* 任意：少し弱めて見やすく */
   }
 
+  /* ← live-3d-box は transform を消さない！(回転が止まる) */
   .live-3d-box{
-    height: auto;
-    position: static;
-    transform: none !important;
+    height: 100%;
+    position: relative;
   }
 
   .live-face{
-    position: static;
-    height: auto;
-    overflow: visible;
+    height: 420px;       /* wrapperと同じに */
+    overflow: hidden;    /* 外に漏らさない */
   }
 
   .live-content{
-    display: flex;
     flex-direction: column;
-    height: auto;
-    gap: 14px;
+    height: 100%;
+    gap: 12px;
   }
 
   .live-content img{
     width: 100%;
-    max-width: 100%;
-    height: auto;
-    object-fit: cover; /* トリミングOKならcover、欠けたくないならcontain */
+    height: 55%;
+    object-fit: cover;
   }
 
   .live-text{
+    height: 45%;
+    overflow-y: auto;    /* 文章が長い時は中だけスクロール */
     font-size: 12px;
     line-height: 1.8;
   }
