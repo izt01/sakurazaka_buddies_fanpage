@@ -259,3 +259,45 @@ ul{
     line-height: 1.6;
   }
 }
+
+/* ===== Live：スマホだけ“切れない”ようにする ===== */
+@media (max-width: 768px){
+
+  /* 3Dカード自体を“可変高さ”にする */
+  .live-3d-wrapper{
+    width: 92%;
+    height: auto;          /* ← 350px固定を解除 */
+    margin: 20px auto;
+  }
+
+  /* faceの高さ固定が切れの原因なので解除 */
+  .live-face{
+    height: auto;          /* ← ここが重要 */
+    min-height: 0;
+    overflow: visible;     /* ← 文字が切れない */
+  }
+
+  /* 中身：横並び → 縦並び */
+  .live-content{
+    flex-direction: column;
+    height: auto;          /* ← 100%を解除 */
+    gap: 14px;
+  }
+
+  /* 画像：高さ100%を解除して幅いっぱいに */
+  .live-content img{
+    width: 100%;
+    max-width: 100%;
+    height: auto;          /* ← 100%を解除 */
+    object-fit: cover;
+  }
+
+  /* 文字：読みやすく */
+  .live-text{
+    font-size: 12px;
+    line-height: 1.8;
+  }
+  .live-text h2{
+    font-size: 16px;
+  }
+}
