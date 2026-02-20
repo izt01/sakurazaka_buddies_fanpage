@@ -223,3 +223,27 @@ ul{
   display: block;
   border-radius: 10px;
 }
+
+/* ===== スマホ：メンバーの“名前エリア”の高さを揃える ===== */
+@media (max-width: 768px){
+  /* 画像の下のテキスト（a/p/div）を同じ箱として扱う */
+  .memberprof td{
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* 名前ブロックの高さを固定（ここがポイント） */
+  .memberprof td p,
+  .memberprof td a,
+  .memberprof td div{
+    display: block;
+    min-height: 3.6em;     /* 2行分くらい（必要なら増やす） */
+    line-height: 1.8;
+    margin: 8px 0 0 0 !important;
+  }
+
+  /* リンクの見た目調整（任意） */
+  .memberprof td a{
+    text-decoration: underline;
+  }
+}
