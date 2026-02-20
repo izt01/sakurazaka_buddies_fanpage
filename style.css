@@ -198,3 +198,28 @@ body { margin: 0; background-size: cover; background-position: center; }
   .live-text{ font-size: 12px; }
   .live-text h2{ font-size: 15px; }
 }
+
+/* Music Video のカードを大きく＆横スクロールで縮まないように */
+ul{
+  list-style: none;
+  padding: 0 16px;
+  margin: 0;
+  display: flex;
+  gap: 28px;
+  overflow-x: auto;
+}
+
+.image-music{
+  flex: 0 0 auto;     /* ← これが重要：小さく縮まない */
+  width: 320px;       /* ← カード幅（好きに調整） */
+  margin: 0;          /* ← 既存の margin:0 80px を打ち消す */
+  text-align: left;
+  font-size: 16px;
+}
+
+.image-music img{
+  width: 100%;        /* カード幅いっぱいに */
+  height: auto;
+  display: block;
+  border-radius: 10px;
+}
