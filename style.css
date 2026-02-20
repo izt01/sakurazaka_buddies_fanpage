@@ -1,13 +1,13 @@
 @charset "utf-8";
 
 body{
-  background-image: url(image_background5.jpg);
+  background-image: url(images/image_background5.jpg);
   background-size: 140%;
 }
 
 header{
   height: 640px;
-  background: url(member2.png) center/cover;
+  background: url(images/member2.png) center/cover;
 }
 
 h1{
