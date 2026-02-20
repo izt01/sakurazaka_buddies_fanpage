@@ -1,13 +1,13 @@
 @charset "utf-8";
 
 body{
-  background-image: url(images/image_background5.jpg);
+  background-image: url(images/background_photo/image_background5.jpg);
   background-size: 140%;
 }
 
 header{
   height: 640px;
-  background: url(images/member2.png) center/cover;
+  background: url(images/another_photo/member2.png) center/cover;
 }
 
 h1{
@@ -89,3 +89,62 @@ ul{
 .copylight{
   font-size: 12px;
 }
+
+.live-3d-wrapper {
+  width: 80%;
+  max-width: 900px;
+  height: 350px;
+  margin: 40px auto;
+  perspective: 1500px;
+}
+
+.live-3d-box {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 1s;
+}
+
+.live-content {
+  display: flex;
+  height: 100%;
+  gap: 20px;
+}
+
+.live-content img {
+  height: 100%;
+  width: auto;
+  max-width: 45%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.live-face {
+  position: absolute;
+  width: 100%;
+  height: 350px;
+  backface-visibility: hidden;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #111;
+  color: #fff;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.live-text {
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+.live-text h2 {
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+/* 4面の配置（半径350px） */
+.face1 { transform: rotateY(0deg) translateZ(350px); }
+.face2 { transform: rotateY(90deg) translateZ(350px); }
+.face3 { transform: rotateY(180deg) translateZ(350px); }
+.face4 { transform: rotateY(270deg) translateZ(350px); }

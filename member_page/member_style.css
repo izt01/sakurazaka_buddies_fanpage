@@ -1,0 +1,29 @@
+@charset "utf-8";
+
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 220px;
+  background: url(../images/another_photo/member_header.png) 20% 10% / cover no-repeat;
+}
+
+.profile-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 40px;
+}
+
+.profile-text {
+  font-size: 20px;
+  line-height: 1.8;
+  text-align: left;
+}
+
+.profile-photo {
+  width: 450px;
+  height: auto;
+  border-radius: 10px;
+}
