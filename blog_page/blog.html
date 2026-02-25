@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog | 櫻坂46</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;700&family=Cormorant+Garamond:wght@300;400;600&family=Noto+Sans+JP:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+:root { --sakura:#f2a7b8; --deep:#1a0a0f; --cream:#fdf8f5; --gold:#c9a96e; --accent:#c0004e; --border:#e8e8e8; }
+html { scroll-behavior:smooth; }
+body { font-family:'Noto Sans JP',sans-serif; background:#fafafa; color:#222; min-height:100vh; }
+
+nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:16px 24px; display:flex; align-items:center; gap:16px; background:rgba(26,10,15,0.92); backdrop-filter:blur(8px); }
+.nav-back { display:flex; align-items:center; gap:8px; color:rgba(253,248,245,0.7); text-decoration:none; font-size:.82rem; letter-spacing:.1em; text-transform:uppercase; font-family:'Cormorant Garamond',serif; transition:color .2s; }
+.nav-back:hover { color:var(--sakura); }
+.nav-back svg { width:16px; height:16px; fill:currentColor; }
+.nav-divider { width:1px; height:18px; background:rgba(255,255,255,.2); }
+.nav-title { font-family:'Noto Serif JP',serif; font-size:.95rem; letter-spacing:.25em; color:var(--cream); }
+
+.page-header { margin-top:56px; padding:52px 0 40px; text-align:center; background:linear-gradient(160deg,#1a0a0f 0%,#2d0f1e 60%,#1a0a0f 100%); position:relative; overflow:hidden; }
+.page-header::after { content:''; position:absolute; bottom:0; left:0; right:0; height:2px; background:linear-gradient(to right,transparent,var(--gold),transparent); }
+.page-header-title { font-family:'Cormorant Garamond',serif; font-size:clamp(2rem,6vw,3.5rem); font-weight:300; letter-spacing:.5em; text-transform:uppercase; background:linear-gradient(135deg,#fff 0%,var(--sakura) 50%,var(--gold) 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.page-header-sub { font-size:.78rem; color:rgba(253,248,245,.4); letter-spacing:.3em; margin-top:.8rem; text-transform:uppercase; font-family:'Cormorant Garamond',serif; }
+
+/* メンバー絞り込みセレクト */
+.filter-bar { display:flex; gap:10px; align-items:center; flex-wrap:wrap; max-width:1100px; margin:36px auto 0; padding:0 24px; }
+.filter-label { font-size:.78rem; color:#888; letter-spacing:.1em; white-space:nowrap; }
+.member-select { padding:7px 14px; border-radius:20px; border:1px solid var(--border); background:#fff; font-size:.8rem; color:#333; cursor:pointer; font-family:'Noto Sans JP',sans-serif; outline:none; transition:border-color .2s; }
+.member-select:focus { border-color:var(--sakura); }
+
+/* グリッド */
+.blog-wrap { max-width:1100px; margin:0 auto; padding:32px 24px 80px; }
+.blog-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:24px 20px; }
+
+.blog-card { display:block; text-decoration:none; color:inherit; cursor:pointer; }
+.blog-thumb { width:100%; aspect-ratio:1/1; overflow:hidden; background:#e8e8e8; position:relative; border-radius:2px; }
+.blog-thumb img { width:100%; height:100%; object-fit:cover; transition:transform .45s; display:block; }
+.blog-card:hover .blog-thumb img { transform:scale(1.06); }
+.blog-author-overlay { position:absolute; bottom:8px; right:8px; display:flex; flex-direction:column; align-items:center; gap:3px; }
+.blog-icon { width:36px; height:36px; border-radius:50%; border:2px solid #fff; overflow:hidden; background:#ccc; }
+.blog-icon img { width:100%; height:100%; object-fit:cover; }
+.blog-author-name { font-size:.68rem; color:#fff; text-shadow:0 1px 4px rgba(0,0,0,.7); white-space:nowrap; }
+.blog-meta { margin-top:9px; }
+.blog-meta-top { display:flex; justify-content:space-between; margin-bottom:3px; }
+.blog-meta-date { font-size:.72rem; color:#999; }
+.blog-meta-member { font-size:.75rem; color:#555; }
+.blog-title { font-size:.86rem; color:#222; line-height:1.45; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; transition:color .2s; }
+.blog-card:hover .blog-title { color:var(--accent); }
+
+footer { text-align:center; padding:28px 20px; border-top:1px solid #eee; font-size:.72rem; color:#aaa; letter-spacing:.2em; font-family:'Cormorant Garamond',serif; background:#fff; }
+
+@media (max-width:900px) { .blog-grid { grid-template-columns:repeat(3,1fr); } }
+@media (max-width:600px) { .blog-grid { grid-template-columns:repeat(2,1fr); gap:16px 12px; } }
+</style>
+</head>
+<body>
+<nav>
+  <a href="sakurazaka.html" class="nav-back"><svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>Back</a>
+  <div class="nav-divider"></div>
+  <span class="nav-title">櫻坂46</span>
+</nav>
+
+<div class="page-header">
+  <h1 class="page-header-title">Blog</h1>
+  <p class="page-header-sub">Member's Voice</p>
+</div>
+
+<div class="filter-bar">
+  <span class="filter-label">メンバー：</span>
+  <select class="member-select" id="memberSelect">
+    <option value="all">全員</option>
+  </select>
+</div>
+
+<div class="blog-wrap">
+  <div class="blog-grid" id="blogGrid"></div>
+</div>
+<footer>© 2026 SAKURAZAKA46 ALL RIGHTS RESERVED</footer>
+
+<script>
+const blogData=[
+  {member:'山崎 天',   date:'2026/02/23',title:'あったかくなってきたかもね', vid:'s7KjD_2BaIg', url:'https://example.com/blog/1'},
+  {member:'井上 梨名', date:'2026/02/23',title:'いのりぶろぐ',               vid:'zRPdTQ3MMKY', url:'https://example.com/blog/2'},
+  {member:'村山 美羽', date:'2026/02/22',title:'2/22',                       vid:'OFPRXTqyGT8', url:'https://example.com/blog/3'},
+  {member:'遠藤 光莉', date:'2026/02/21',title:'#373. Addiction！',          vid:'PF3s-JpW8gk', url:'https://example.com/blog/4'},
+  {member:'森田ひかる', date:'2026/02/21',title:'春が来た気がする',           vid:'5MHf9RVjg9c', url:'https://example.com/blog/5'},
+  {member:'藤吉 夏鈴', date:'2026/02/20',title:'撮影日和',                   vid:'tnBbAvPfJv8', url:'https://example.com/blog/6'},
+  {member:'田村 保乃', date:'2026/02/20',title:'ありがとうございました！',    vid:'mD7r8ORdHPo', url:'https://example.com/blog/7'},
+  {member:'守屋 麗奈', date:'2026/02/19',title:'最近のこと',                 vid:'RaJqFkI0bWw', url:'https://example.com/blog/8'},
+  {member:'大園 玲',   date:'2026/02/18',title:'おおぞのれい日記',           vid:'hCzCTdqAT9s', url:'https://example.com/blog/9'},
+  {member:'山崎 天',   date:'2026/02/17',title:'リハーサル終わりに',         vid:'s7KjD_2BaIg', url:'https://example.com/blog/10'},
+  {member:'松田 里奈', date:'2026/02/16',title:'撮影のこと',                 vid:'OFPRXTqyGT8', url:'https://example.com/blog/11'},
+  {member:'幸阪 茉里乃',date:'2026/02/15',title:'バレンタインの翌日',        vid:'PF3s-JpW8gk', url:'https://example.com/blog/12'},
+  {member:'増本 綺良', date:'2026/02/14',title:'Happy Valentine！',          vid:'5MHf9RVjg9c', url:'https://example.com/blog/13'},
+  {member:'田村 保乃', date:'2026/02/13',title:'最近ハマってること',          vid:'zRPdTQ3MMKY', url:'https://example.com/blog/14'},
+  {member:'井上 梨名', date:'2026/02/12',title:'ありがとう2月',              vid:'tnBbAvPfJv8', url:'https://example.com/blog/15'},
+  {member:'村山 美羽', date:'2026/02/11',title:'建国記念日',                 vid:'mD7r8ORdHPo', url:'https://example.com/blog/16'},
+];
+
+// メンバーセレクトに選択肢追加
+const members=[...new Set(blogData.map(b=>b.member))];
+const sel=document.getElementById('memberSelect');
+members.forEach(m=>{ const o=document.createElement('option'); o.value=m; o.textContent=m; sel.appendChild(o); });
+
+function render(filter){
+  const list=filter==='all'?blogData:blogData.filter(b=>b.member===filter);
+  document.getElementById('blogGrid').innerHTML=list.map(b=>`
+    <a href="${b.url}" target="_blank" class="blog-card">
+      <div class="blog-thumb">
+        <img src="https://img.youtube.com/vi/${b.vid}/mqdefault.jpg" alt="${b.member}" draggable="false">
+        <div class="blog-author-overlay">
+          <div class="blog-icon"><img src="https://img.youtube.com/vi/${b.vid}/default.jpg" alt="${b.member}"></div>
+          <span class="blog-author-name">${b.member}</span>
+        </div>
+      </div>
+      <div class="blog-meta">
+        <div class="blog-meta-top">
+          <span class="blog-meta-date">${b.date}</span>
+          <span class="blog-meta-member">${b.member}</span>
+        </div>
+        <p class="blog-title">${b.title}</p>
+      </div>
+    </a>`).join('');
+}
+sel.addEventListener('change',()=>render(sel.value));
+render('all');
+</script>
+</body>
+</html>

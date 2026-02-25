@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Music Video | 櫻坂46</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;700&family=Cormorant+Garamond:wght@300;400;600&family=Noto+Sans+JP:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+:root { --sakura:#f2a7b8; --deep:#1a0a0f; --cream:#fdf8f5; --gold:#c9a96e; --accent:#c0004e; --border:#e8e8e8; }
+html { scroll-behavior:smooth; }
+body { font-family:'Noto Sans JP',sans-serif; background:#0f0f11; color:#eee; min-height:100vh; }
+
+nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:16px 24px; display:flex; align-items:center; gap:16px; background:rgba(10,8,14,0.95); backdrop-filter:blur(8px); }
+.nav-back { display:flex; align-items:center; gap:8px; color:rgba(253,248,245,0.6); text-decoration:none; font-size:.82rem; letter-spacing:.1em; text-transform:uppercase; font-family:'Cormorant Garamond',serif; transition:color .2s; }
+.nav-back:hover { color:var(--sakura); }
+.nav-back svg { width:16px; height:16px; fill:currentColor; }
+.nav-divider { width:1px; height:18px; background:rgba(255,255,255,.15); }
+.nav-title { font-family:'Noto Serif JP',serif; font-size:.95rem; letter-spacing:.25em; color:var(--cream); }
+
+.page-header { margin-top:56px; padding:52px 0 40px; text-align:center; background:linear-gradient(160deg,#1a0a0f 0%,#0a0a1e 60%,#1a0a0f 100%); position:relative; overflow:hidden; }
+.page-header::after { content:''; position:absolute; bottom:0; left:0; right:0; height:2px; background:linear-gradient(to right,transparent,var(--gold),transparent); }
+.page-header-title { font-family:'Cormorant Garamond',serif; font-size:clamp(1.8rem,5vw,3rem); font-weight:300; letter-spacing:.4em; text-transform:uppercase; background:linear-gradient(135deg,#fff 0%,var(--sakura) 50%,var(--gold) 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.page-header-sub { font-size:.78rem; color:rgba(253,248,245,.35); letter-spacing:.3em; margin-top:.8rem; text-transform:uppercase; font-family:'Cormorant Garamond',serif; }
+
+.mv-wrap { max-width:1200px; margin:0 auto; padding:40px 24px 80px; }
+.mv-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:32px 24px; }
+
+.mv-card { display:block; text-decoration:none; color:inherit; cursor:pointer; }
+.mv-thumb { width:100%; aspect-ratio:16/9; border-radius:8px; overflow:hidden; background:#1a1a2e; position:relative; }
+.mv-thumb img { width:100%; height:100%; object-fit:cover; transition:transform .5s,filter .5s; display:block; filter:brightness(.85); }
+.mv-card:hover .mv-thumb img { transform:scale(1.06); filter:brightness(1); }
+.mv-play-overlay { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,.25); transition:background .3s; }
+.mv-card:hover .mv-play-overlay { background:rgba(0,0,0,.45); }
+.mv-play-btn { width:52px; height:52px; border-radius:50%; border:2px solid rgba(255,255,255,.85); display:flex; align-items:center; justify-content:center; transition:transform .3s,background .3s; }
+.mv-play-btn::after { content:''; border-style:solid; border-width:9px 0 9px 18px; border-color:transparent transparent transparent rgba(255,255,255,.95); margin-left:5px; }
+.mv-card:hover .mv-play-btn { transform:scale(1.12); background:rgba(242,167,184,.2); border-color:var(--sakura); }
+.mv-badge { position:absolute; top:10px; left:10px; background:rgba(26,10,15,.8); border:1px solid rgba(201,169,110,.5); color:var(--gold); font-size:.65rem; padding:3px 9px; border-radius:4px; letter-spacing:.06em; font-family:'Cormorant Garamond',serif; }
+.mv-info { margin-top:12px; padding:0 2px; }
+.mv-single { font-size:.75rem; color:#888; margin-bottom:3px; }
+.mv-title { font-size:1rem; color:#ddd; line-height:1.45; transition:color .2s; font-family:'Noto Serif JP',serif; font-weight:300; }
+.mv-card:hover .mv-title { color:var(--sakura); }
+.mv-type { font-size:.7rem; color:#666; margin-top:3px; }
+
+footer { text-align:center; padding:28px 20px; border-top:1px solid #1e1e28; font-size:.72rem; color:#555; letter-spacing:.2em; font-family:'Cormorant Garamond',serif; background:#0a0a0f; }
+
+@media (max-width:860px) { .mv-grid { grid-template-columns:repeat(2,1fr); } }
+@media (max-width:480px) { .mv-grid { grid-template-columns:1fr; gap:24px; } }
+</style>
+</head>
+<body>
+<nav>
+  <a href="sakurazaka.html" class="nav-back"><svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>Back</a>
+  <div class="nav-divider"></div>
+  <span class="nav-title">櫻坂46</span>
+</nav>
+
+<div class="page-header">
+  <h1 class="page-header-title">Music Video</h1>
+  <p class="page-header-sub">Official MV Collection</p>
+</div>
+
+<div class="mv-wrap">
+  <div class="mv-grid" id="mvGrid"></div>
+</div>
+<footer>© 2026 SAKURAZAKA46 ALL RIGHTS RESERVED</footer>
+
+<script>
+const mvData=[
+  {single:'14th Single',title:'The growing up train',   type:'表題曲', vid:'mD7r8ORdHPo',url:'https://www.youtube.com/watch?v=mD7r8ORdHPo'},
+  {single:'13th Single',title:'Unhappy birthday構文',   type:'表題曲', vid:'RaJqFkI0bWw',url:'https://www.youtube.com/watch?v=RaJqFkI0bWw'},
+  {single:'12th Single',title:'Make or Break',          type:'表題曲', vid:'hCzCTdqAT9s',url:'https://www.youtube.com/watch?v=hCzCTdqAT9s'},
+  {single:'11th Single',title:'UDAGAWA GENERATION',     type:'表題曲', vid:'tnBbAvPfJv8',url:'https://www.youtube.com/watch?v=tnBbAvPfJv8'},
+  {single:'10th Single',title:'I want tomorrow to come',type:'表題曲', vid:'OFPRXTqyGT8',url:'https://www.youtube.com/watch?v=OFPRXTqyGT8'},
+  {single:'9th Single', title:'自業自得',               type:'表題曲', vid:'PF3s-JpW8gk',url:'https://www.youtube.com/watch?v=OFPRXTqyGT8'},
+  {single:'8th Single', title:'何歳の頃に戻りたいのか？',type:'表題曲', vid:'s7KjD_2BaIg',url:'https://www.youtube.com/watch?v=s7KjD_2BaIg'},
+  {single:'7th Single', title:'僕たちの嘘と真実',       type:'Documentary of 欅坂46', vid:'5MHf9RVjg9c',url:'https://www.youtube.com/watch?v=5MHf9RVjg9c'},
+  {single:'6th Single', title:'Start over!',            type:'表題曲', vid:'zRPdTQ3MMKY',url:'https://www.youtube.com/watch?v=zRPdTQ3MMKY'},
+  {single:'5th Single', title:'桜月',                   type:'表題曲', vid:'s7KjD_2BaIg',url:'https://www.youtube.com/watch?v=s7KjD_2BaIg'},
+  {single:'4th Single', title:'五月雨よ',               type:'表題曲', vid:'PF3s-JpW8gk',url:'https://www.youtube.com/watch?v=PF3s-JpW8gk'},
+  {single:'1st Single', title:"Nobody's fault",         type:'表題曲', vid:'5MHf9RVjg9c',url:'https://www.youtube.com/watch?v=5MHf9RVjg9c'},
+];
+
+document.getElementById('mvGrid').innerHTML=mvData.map(m=>`
+  <a href="${m.url}" target="_blank" class="mv-card">
+    <div class="mv-thumb">
+      <img src="https://img.youtube.com/vi/${m.vid}/mqdefault.jpg" alt="${m.title}" draggable="false">
+      <div class="mv-play-overlay"><div class="mv-play-btn"></div></div>
+      <span class="mv-badge">${m.single}</span>
+    </div>
+    <div class="mv-info">
+      <p class="mv-single">${m.single}</p>
+      <p class="mv-title">${m.title}</p>
+      <p class="mv-type">${m.type}</p>
+    </div>
+  </a>`).join('');
+</script>
+</body>
+</html>

@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>櫻坂46 Official</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;700&family=Cormorant+Garamond:wght@300;400;600&family=Noto+Sans+JP:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+
+:root {
+  --sakura:#f2a7b8; --deep:#1a0a0f; --cream:#fdf8f5;
+  --gold:#c9a96e; --border:#e0e0e0;
+}
+html { scroll-behavior:smooth; }
+body { font-family:'Noto Sans JP',sans-serif; background:#fff; color:#222; overflow-x:hidden; }
+
+/* ═══════════════════════════════
+   NAV（PCリンク左 + ハンバーガー右）
+═══════════════════════════════ */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:200;
+  padding:0 28px; height:56px;
+  display:flex; justify-content:space-between; align-items:center;
+  background:rgba(26,10,15,0.88); backdrop-filter:blur(10px);
+  transition:background .3s;
+}
+.nav-logo {
+  font-family:'Noto Serif JP',serif; font-size:.95rem;
+  letter-spacing:.3em; color:var(--cream); text-decoration:none;
+}
+/* PC nav links（デスクトップのみ表示） */
+.nav-pc-links { display:flex; gap:24px; list-style:none; }
+.nav-pc-links a {
+  font-family:'Cormorant Garamond',serif; font-size:.82rem;
+  letter-spacing:.18em; color:rgba(253,248,245,.65);
+  text-decoration:none; text-transform:uppercase; transition:color .25s;
+}
+.nav-pc-links a:hover { color:var(--sakura); }
+
+/* ハンバーガーボタン（常時右端に表示） */
+.hamburger-btn {
+  background:none; border:none; cursor:pointer;
+  display:flex; flex-direction:column; justify-content:center;
+  gap:5px; padding:6px; z-index:300;
+}
+.hamburger-btn span {
+  display:block; width:26px; height:2px;
+  background:var(--cream); border-radius:2px; transition:all .35s;
+}
+.hamburger-btn.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+.hamburger-btn.open span:nth-child(2) { opacity:0; transform:scaleX(0); }
+.hamburger-btn.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+
+/* ═══════════════════════════════
+   フルスクリーン メニューオーバーレイ
+═══════════════════════════════ */
+.menu-overlay {
+  position:fixed; inset:0; z-index:190;
+  background:rgba(15,5,10,0.97);
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:0;
+  opacity:0; pointer-events:none;
+  transition:opacity .4s ease;
+}
+.menu-overlay.open { opacity:1; pointer-events:all; }
+
+.menu-overlay-logo {
+  position:absolute; top:0; left:0; right:0; height:56px;
+  display:flex; align-items:center; padding:0 28px;
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.menu-overlay-logo span {
+  font-family:'Noto Serif JP',serif; font-size:.95rem;
+  letter-spacing:.3em; color:var(--cream);
+}
+
+.menu-items { display:flex; flex-direction:column; align-items:center; width:100%; }
+.menu-item {
+  display:block; text-decoration:none;
+  font-family:'Cormorant Garamond',serif; font-size:clamp(1.2rem,4vw,1.6rem);
+  letter-spacing:.4em; text-transform:uppercase;
+  color:rgba(253,248,245,.7);
+  width:100%; max-width:540px; text-align:center;
+  padding:22px 0;
+  border-bottom:1px solid rgba(255,255,255,.07);
+  transition:color .2s, letter-spacing .2s;
+  position:relative;
+}
+.menu-item:first-child { border-top:1px solid rgba(255,255,255,.07); }
+.menu-item:hover { color:var(--cream); letter-spacing:.5em; }
+
+/* ═══════════════════════════════
+   HERO（縦幅短め）
+═══════════════════════════════ */
+.hero {
+  position:relative; height:72vh; min-height:420px; max-height:700px;
+  display:flex; align-items:center; justify-content:center; overflow:hidden;
+  background:linear-gradient(160deg,#1a0a0f 0%,#2d0f1e 48%,#1a0a0f 100%);
+  margin-top:56px;
+}
+.hero-bg-glow {
+  position:absolute; inset:0;
+  background:
+    radial-gradient(ellipse at 30% 50%,rgba(242,167,184,.22) 0%,transparent 60%),
+    radial-gradient(ellipse at 75% 20%,rgba(201,169,110,.12) 0%,transparent 50%);
+}
+.petal {
+  position:absolute; border-radius:50% 0 50% 0;
+  background:radial-gradient(circle,rgba(242,167,184,.75),rgba(242,167,184,.05));
+  animation:petalFall linear infinite; pointer-events:none;
+}
+@keyframes petalFall {
+  0%   { transform:translateY(-20px) rotate(0deg); opacity:0; }
+  10%  { opacity:1; } 90% { opacity:.5; }
+  100% { transform:translateY(110vh) rotate(720deg); opacity:0; }
+}
+.hero-content { position:relative; z-index:2; text-align:center; padding:0 20px; }
+.hero-title {
+  font-family:'Noto Serif JP',serif;
+  font-size:clamp(3rem,13vw,10rem); font-weight:300; letter-spacing:.3em;
+  background:linear-gradient(135deg,#fff 0%,var(--sakura) 40%,var(--gold) 80%,#fff 100%);
+  background-size:200% 200%;
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  line-height:1; animation:shimmer 5s ease-in-out infinite;
+}
+@keyframes shimmer { 0%,100%{background-position:0% 50%} 50%{background-position:100% 50%} }
+.hero-sub {
+  font-family:'Cormorant Garamond',serif; font-size:clamp(.7rem,2vw,1rem);
+  letter-spacing:.5em; color:rgba(253,248,245,.4); margin-top:1.2rem; text-transform:uppercase;
+}
+.hero-line {
+  width:1px; height:55px;
+  background:linear-gradient(to bottom,transparent,var(--gold),transparent);
+  margin:1.6rem auto 0; animation:linePulse 2.2s ease-in-out infinite;
+}
+@keyframes linePulse { 0%,100%{opacity:.35} 50%{opacity:1} }
+
+/* ═══════════════════════════════
+   CAROUSEL SLIDER（画像4参考）
+═══════════════════════════════ */
+.carousel-section {
+  background:#0d0810; padding:60px 0 70px; overflow:hidden;
+}
+.carousel-label {
+  text-align:center; margin-bottom:36px;
+  font-family:'Cormorant Garamond',serif; font-size:clamp(1.2rem,3vw,2rem);
+  font-weight:300; letter-spacing:.4em; text-transform:uppercase;
+  color:rgba(253,248,245,.7);
+}
+.carousel-label::after { content:''; display:block; width:40px; height:1px; background:var(--gold); margin:10px auto 0; }
+
+.carousel-track-wrap { position:relative; }
+.carousel-track {
+  display:flex; align-items:center;
+  gap:0;
+  transition:transform .5s cubic-bezier(.4,0,.2,1);
+  cursor:grab; user-select:none;
+  padding:20px 0 30px;
+  will-change:transform;
+}
+.carousel-track.grabbing { cursor:grabbing; }
+
+.carousel-slide {
+  flex-shrink:0;
+  width:42vw; max-width:560px; min-width:240px;
+  aspect-ratio:16/9;
+  border-radius:10px; overflow:hidden;
+  background:#1a1a2e;
+  transition:transform .45s cubic-bezier(.4,0,.2,1), box-shadow .45s, opacity .45s;
+  transform:scale(.82); opacity:.55;
+  margin:0 -2vw;
+  position:relative;
+  text-decoration:none; display:block;
+  flex-shrink:0;
+}
+.carousel-slide.active {
+  transform:scale(1); opacity:1; z-index:2;
+  box-shadow:0 24px 60px rgba(0,0,0,.7), 0 0 0 1px rgba(201,169,110,.2);
+}
+.carousel-slide.adjacent {
+  transform:scale(.88); opacity:.72; z-index:1;
+}
+.carousel-slide img {
+  width:100%; height:100%; object-fit:cover; display:block;
+  transition:transform .5s;
+}
+.carousel-slide.active:hover img { transform:scale(1.03); }
+.carousel-slide-overlay {
+  position:absolute; inset:0;
+  background:linear-gradient(to top,rgba(15,5,10,.75) 0%,transparent 50%);
+  display:flex; flex-direction:column; justify-content:flex-end;
+  padding:20px 24px;
+  opacity:0; transition:opacity .3s;
+}
+.carousel-slide.active .carousel-slide-overlay { opacity:1; }
+.carousel-slide-label { font-size:.7rem; color:var(--gold); letter-spacing:.15em; font-family:'Cormorant Garamond',serif; margin-bottom:4px; }
+.carousel-slide-title { font-size:.95rem; color:#fff; letter-spacing:.05em; }
+
+/* ドット */
+.carousel-dots { display:flex; justify-content:center; gap:8px; margin-top:24px; }
+.carousel-dot {
+  width:6px; height:6px; border-radius:50%;
+  background:rgba(255,255,255,.25); cursor:pointer;
+  transition:all .3s;
+}
+.carousel-dot.active { background:var(--gold); transform:scale(1.3); }
+
+
+
+
+/* ═══════════════════════════════
+   SECTION COMMON
+═══════════════════════════════ */
+section { padding:60px 0; }
+.section-header { text-align:center; margin-bottom:36px; }
+.section-title {
+  font-family:'Cormorant Garamond',serif; font-size:clamp(1.6rem,4vw,3rem);
+  font-weight:300; letter-spacing:.45em; text-transform:uppercase; color:#222;
+}
+.section-title::after { content:''; display:block; width:50px; height:1px; background:var(--gold); margin:12px auto 0; }
+
+/* ── NEWS ── */
+.news-section { background:#fff; }
+.news-ticker-outer {
+  overflow:hidden; position:relative;
+  border-top:1px solid var(--border); border-bottom:1px solid var(--border);
+  background:#fafafa; margin-bottom:36px;
+}
+.news-ticker-outer::before,.news-ticker-outer::after {
+  content:''; position:absolute; top:0; bottom:0; width:80px; z-index:2; pointer-events:none;
+}
+.news-ticker-outer::before { left:0; background:linear-gradient(to right,#fafafa,transparent); }
+.news-ticker-outer::after  { right:0; background:linear-gradient(to left,#fafafa,transparent); }
+.news-ticker { display:flex; width:max-content; animation:tickerScroll 35s linear infinite; }
+.news-ticker:hover { animation-play-state:paused; }
+@keyframes tickerScroll { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+.ticker-item { display:flex; align-items:center; gap:12px; padding:14px 30px; border-right:1px solid var(--border); cursor:pointer; white-space:nowrap; }
+.ticker-item:hover .ticker-text { color:#c0004e; }
+.ticker-date { font-size:.75rem; color:#999; min-width:80px; }
+.ticker-tag { font-size:.65rem; padding:2px 8px; border:1px solid var(--sakura); color:#c0004e; border-radius:20px; }
+.ticker-text { font-size:.85rem; color:#333; transition:color .2s; }
+.news-list { max-width:820px; margin:0 auto; padding:0 20px; }
+.news-row { display:flex; align-items:flex-start; gap:12px; padding:16px 0; border-bottom:1px solid #eee; transition:padding-left .25s; flex-wrap:wrap; }
+.news-row:hover { padding-left:6px; }
+.news-row-date { font-size:.78rem; color:#999; min-width:86px; padding-top:2px; white-space:nowrap; }
+.news-row-tag { font-size:.65rem; padding:2px 8px; border:1px solid var(--sakura); color:#c0004e; border-radius:20px; white-space:nowrap; margin-top:2px; flex-shrink:0; }
+.news-row a { font-size:.88rem; color:#222; text-decoration:none; transition:color .2s; line-height:1.5; }
+.news-row:hover a { color:#c0004e; }
+
+/* ── BLOG ── */
+.blog-section { background:#fff; padding-bottom:60px; }
+.drag-scroll-outer { overflow:hidden; position:relative; cursor:grab; }
+.drag-scroll-outer.dragging { cursor:grabbing; }
+.drag-scroll-outer::before,.drag-scroll-outer::after {
+  content:''; position:absolute; top:0; bottom:0; width:60px; z-index:2; pointer-events:none;
+}
+.blog-scroll-outer::before { left:0; background:linear-gradient(to right,#fff,transparent); }
+.blog-scroll-outer::after  { right:0; background:linear-gradient(to left,#fff,transparent); }
+.mv-scroll-outer::before { left:0; background:linear-gradient(to right,#f0faf0,transparent); }
+.mv-scroll-outer::after  { right:0; background:linear-gradient(to left,#f0faf0,transparent); }
+.auto-track { display:flex; width:max-content; user-select:none; }
+.auto-track.paused { animation-play-state:paused !important; }
+.blog-track { gap:16px; padding:0 24px 20px; animation:blogScroll 45s linear infinite; }
+@keyframes blogScroll { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+.blog-card { flex-shrink:0; width:220px; cursor:pointer; text-decoration:none; color:inherit; display:block; }
+@media(min-width:480px){.blog-card{width:260px;}}
+@media(min-width:768px){.blog-card{width:280px;}}
+.blog-thumb { width:100%; aspect-ratio:1/1; overflow:hidden; background:#e8e8e8; position:relative; }
+.blog-thumb img { width:100%; height:100%; object-fit:cover; transition:transform .45s; display:block; }
+.blog-card:hover .blog-thumb img { transform:scale(1.06); }
+.blog-author { position:absolute; bottom:8px; right:8px; display:flex; flex-direction:column; align-items:center; gap:3px; }
+.blog-icon { width:36px; height:36px; border-radius:50%; border:2px solid #fff; overflow:hidden; background:#ccc; }
+.blog-icon img { width:100%; height:100%; object-fit:cover; }
+.blog-author-name { font-size:.68rem; color:#fff; text-shadow:0 1px 3px rgba(0,0,0,.7); white-space:nowrap; }
+.blog-meta { margin-top:8px; padding:0 2px; }
+.blog-meta-top { display:flex; justify-content:space-between; align-items:center; margin-bottom:3px; }
+.blog-meta-date { font-size:.72rem; color:#999; }
+.blog-meta-member { font-size:.75rem; color:#555; }
+.blog-title-text { font-size:.84rem; color:#222; line-height:1.4; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+
+/* ── MUSIC VIDEO ── */
+.mv-section { background:#f0faf0; padding:46px 0 56px; }
+.mv-section .section-header { text-align:left; padding-left:24px; margin-bottom:22px; }
+.mv-section .section-title { font-family:'Noto Sans JP',sans-serif; font-weight:700; font-size:1.2rem; letter-spacing:.05em; color:#222; }
+.mv-section .section-title::after { display:none; }
+.mv-track { gap:20px; padding:8px 24px; animation:mvScroll 55s linear infinite; }
+@keyframes mvScroll { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+.mv-card { flex-shrink:0; width:240px; cursor:pointer; text-decoration:none; color:inherit; display:block; }
+@media(min-width:480px){.mv-card{width:270px;}}
+@media(min-width:768px){.mv-card{width:300px;}}
+.mv-thumb { width:100%; aspect-ratio:16/9; border-radius:8px; overflow:hidden; background:#cde; position:relative; }
+.mv-thumb img { width:100%; height:100%; object-fit:cover; transition:transform .45s; display:block; }
+.mv-card:hover .mv-thumb img { transform:scale(1.05); }
+.mv-play-overlay { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,.18); transition:background .3s; }
+.mv-card:hover .mv-play-overlay { background:rgba(0,0,0,.35); }
+.mv-play-btn { width:44px; height:44px; border-radius:50%; border:2px solid rgba(255,255,255,.9); display:flex; align-items:center; justify-content:center; transition:transform .3s; }
+.mv-play-btn::after { content:''; border-style:solid; border-width:8px 0 8px 16px; border-color:transparent transparent transparent rgba(255,255,255,.95); margin-left:4px; }
+.mv-card:hover .mv-play-btn { transform:scale(1.15); }
+.mv-info { margin-top:10px; padding:0 2px; }
+.mv-single-label { font-size:.74rem; color:#555; margin-bottom:2px; }
+.mv-song-title { font-size:.9rem; color:#111; }
+
+/* ── YOUTUBE ── */
+.yt-section { background:#fff; padding:56px 0 66px; }
+.yt-channels-wrap { max-width:1100px; margin:0 auto; padding:0 24px; display:grid; grid-template-columns:1fr 1fr; gap:40px; }
+.yt-channel-header { display:flex; align-items:center; gap:10px; margin-bottom:16px; padding-bottom:12px; border-left:3px solid #222; padding-left:12px; }
+.yt-channel-name { font-size:.92rem; font-weight:600; color:#111; letter-spacing:.02em; line-height:1.3; }
+.yt-icon-btn { display:flex; align-items:center; justify-content:center; width:30px; height:30px; background:#ff0000; border-radius:4px; text-decoration:none; flex-shrink:0; transition:opacity .2s; }
+.yt-icon-btn:hover { opacity:.8; }
+.yt-icon-btn svg { width:16px; height:16px; fill:#fff; }
+.yt-videos { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.yt-video-card { cursor:pointer; text-decoration:none; color:inherit; display:block; }
+.yt-video-thumb { width:100%; aspect-ratio:16/9; overflow:hidden; background:#ddd; border-radius:4px; }
+.yt-video-thumb img { width:100%; height:100%; object-fit:cover; transition:transform .4s; display:block; }
+.yt-video-card:hover .yt-video-thumb img { transform:scale(1.05); }
+.yt-video-title { font-size:.75rem; color:#333; margin-top:6px; line-height:1.5; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+
+/* ── MEMBER ── */
+.member-section { background:#fff; padding:60px 0 70px; }
+.member-gen-block { margin-bottom:52px; }
+.member-gen-block:last-child { margin-bottom:0; }
+.member-gen-header { display:flex; align-items:center; gap:0; margin-bottom:20px; padding:0 24px; }
+.member-gen-label { font-size:.82rem; font-weight:600; color:#333; padding:6px 18px 6px 0; border-right:2px solid var(--gold); letter-spacing:.05em; }
+.member-gen-divider { flex:1; height:2px; background:linear-gradient(to right,var(--gold) 0%,rgba(201,169,110,.15) 100%); margin-left:0; }
+.member-grid { display:grid; grid-template-columns:repeat(6,1fr); gap:18px 14px; padding:0 24px; }
+.member-card { display:block; text-decoration:none; color:inherit; cursor:pointer; }
+.member-photo { width:100%; aspect-ratio:3/4; overflow:hidden; background:#e8e8e8; position:relative; }
+.member-photo img { width:100%; height:100%; object-fit:cover; object-position:top center; display:block; transition:transform .45s ease; filter:grayscale(5%); }
+.member-card:hover .member-photo img { transform:scale(1.06); filter:grayscale(0%); }
+.member-info { margin-top:8px; padding:0 2px; }
+.member-name-ja { font-size:.82rem; color:#222; letter-spacing:.03em; line-height:1.4; transition:color .2s; }
+.member-card:hover .member-name-ja { color:#c0004e; }
+.member-name-ruby { font-size:.68rem; color:#888; letter-spacing:.05em; margin-top:2px; line-height:1.3; }
+.gen-2 .member-gen-label { color:#c0004e; border-right-color:#c0004e; }
+.gen-2 .member-gen-divider { background:linear-gradient(to right,#c0004e 0%,rgba(192,0,78,.1) 100%); }
+.gen-3 .member-gen-label { color:#7a4a9e; border-right-color:#7a4a9e; }
+.gen-3 .member-gen-divider { background:linear-gradient(to right,#7a4a9e 0%,rgba(122,74,158,.1) 100%); }
+.gen-4 .member-gen-label { color:#2e7ec5; border-right-color:#2e7ec5; }
+.gen-4 .member-gen-divider { background:linear-gradient(to right,#2e7ec5 0%,rgba(46,126,197,.1) 100%); }
+
+/* FOOTER */
+footer { text-align:center; padding:32px 20px; border-top:1px solid #eee; font-size:.72rem; color:#aaa; letter-spacing:.2em; font-family:'Cormorant Garamond',serif; background:#fff; }
+
+/* ═══════════════════════════════
+   RESPONSIVE
+═══════════════════════════════ */
+@media(max-width:767px) {
+  .nav-pc-links { display:none; }
+  nav { padding:0 18px; }
+  section { padding:48px 0; }
+  .news-row { gap:8px; }
+  .news-row-date { min-width:70px; font-size:.72rem; }
+  .mv-section .section-header { padding-left:18px; }
+  .yt-channels-wrap { grid-template-columns:1fr; gap:36px; padding:0 18px; }
+  .yt-channel-name { font-size:.82rem; }
+  .yt-video-title  { font-size:.7rem; }
+  .member-grid { grid-template-columns:repeat(3,1fr); gap:12px 10px; }
+}
+@media(max-width:1024px) { .member-grid { grid-template-columns:repeat(4,1fr); } }
+@media(max-width:600px)  { .member-grid { grid-template-columns:repeat(3,1fr); } }
+@media(max-width:400px)  {
+  .yt-videos { grid-template-columns:1fr; }
+  .blog-card { width:200px; }
+  .mv-card   { width:210px; }
+  .member-grid { grid-template-columns:repeat(2,1fr); }
+  .carousel-slide { width:72vw; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════ NAV ═══════ -->
+<nav id="mainNav">
+  <a href="#top" class="nav-logo">櫻坂４６</a>
+  <ul class="nav-pc-links">
+    <li><a href="news.html">News</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="music.html">Music Video</a></li>
+    <li><a href="youtube.html">YouTube</a></li>
+    <li><a href="member.html">Member</a></li>
+  </ul>
+  <button class="hamburger-btn" id="hamburgerBtn" aria-label="メニューを開く">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ═══════ フルスクリーン メニューオーバーレイ ═══════ -->
+<div class="menu-overlay" id="menuOverlay">
+  <div class="menu-overlay-logo">
+    <span>櫻坂４６</span>
+  </div>
+  <div class="menu-items">
+    <a class="menu-item" href="news.html"     onclick="closeMenu()">News</a>
+    <a class="menu-item" href="blog.html"     onclick="closeMenu()">Blog</a>
+    <a class="menu-item" href="music.html"    onclick="closeMenu()">Music Video</a>
+    <a class="menu-item" href="youtube.html"  onclick="closeMenu()">YouTube</a>
+    <a class="menu-item" href="member.html"   onclick="closeMenu()">Member</a>
+    <a class="menu-item" href="schedule.html" onclick="closeMenu()">Schedule</a>
+  </div>
+</div>
+
+<!-- ═══════ ① HERO ═══════ -->
+<section class="hero" id="top">
+  <div class="hero-bg-glow"></div>
+  <div id="petals"></div>
+  <div class="hero-content">
+    <h1 class="hero-title">櫻坂４６</h1>
+    <p class="hero-sub">Sakurazaka46 &nbsp;•&nbsp; Official Site</p>
+    <div class="hero-line"></div>
+  </div>
+</section>
+
+<!-- ═══════ CAROUSEL SLIDER ═══════ -->
+<div class="carousel-section">
+  <p class="carousel-label">Pickup</p>
+  <div class="carousel-track-wrap">
+    <div class="carousel-track" id="carouselTrack"></div>
+  </div>
+  <div class="carousel-dots"  id="carouselDots"></div>
+</div>
+
+<!-- ═══════ ② NEWS ═══════ -->
+<section class="news-section" id="news">
+  <div class="section-header"><h2 class="section-title">News</h2></div>
+  <div class="news-ticker-outer">
+    <div class="news-ticker" id="newsTicker"></div>
+  </div>
+  <div class="news-list">
+    <div class="news-row"><span class="news-row-date">2026.02.23</span><span class="news-row-tag">LIVE</span><a href="https://example.com/news/1" target="_blank">全国アリーナツアー2026 開催決定！チケット先行受付スタート</a></div>
+    <div class="news-row"><span class="news-row-date">2026.02.20</span><span class="news-row-tag">SINGLE</span><a href="https://example.com/news/2" target="_blank">14thシングル「The growing up train」ストリーミング配信中</a></div>
+    <div class="news-row"><span class="news-row-date">2026.02.15</span><span class="news-row-tag">TV</span><a href="https://example.com/news/3" target="_blank">「ミュージックステーション」3月7日出演決定</a></div>
+    <div class="news-row"><span class="news-row-date">2026.02.10</span><span class="news-row-tag">EVENT</span><a href="https://example.com/news/4" target="_blank">握手会・特典会スケジュール更新！申込受付開始</a></div>
+    <div class="news-row"><span class="news-row-date">2026.02.01</span><span class="news-row-tag">INFO</span><a href="https://example.com/news/5" target="_blank">オフィシャルファンクラブ「S46」会員向けコンテンツ更新のお知らせ</a></div>
+  </div>
+</section>
+
+<!-- ═══════ ③ BLOG ═══════ -->
+<section class="blog-section" id="blog">
+  <div class="section-header"><h2 class="section-title">Blog</h2></div>
+  <div class="drag-scroll-outer blog-scroll-outer" id="blogOuter">
+    <div class="auto-track blog-track" id="blogTrack"></div>
+  </div>
+</section>
+
+<!-- ═══════ ④ MUSIC VIDEO ═══════ -->
+<section class="mv-section" id="mv">
+  <div class="section-header"><h2 class="section-title">Music Video</h2></div>
+  <div class="drag-scroll-outer mv-scroll-outer" id="mvOuter">
+    <div class="auto-track mv-track" id="mvTrack"></div>
+  </div>
+</section>
+
+<!-- ═══════ ⑤ YOUTUBE ═══════ -->
+<section class="yt-section" id="youtube">
+  <div class="section-header"><h2 class="section-title">YouTube</h2></div>
+  <div class="yt-channels-wrap" id="ytChannels"></div>
+</section>
+
+<!-- ═══════ ⑥ MEMBER ═══════ -->
+<section class="member-section" id="member">
+  <div class="section-header"><h2 class="section-title">Member</h2></div>
+  <div id="memberContent"></div>
+</section>
+
+<footer>© 2026 SAKURAZAKA46 ALL RIGHTS RESERVED</footer>
+
+<script>
+/* ══════════════════════════════════════════
+   ハンバーガー / メニューオーバーレイ
+══════════════════════════════════════════ */
+const hamburgerBtn = document.getElementById('hamburgerBtn');
+const menuOverlay  = document.getElementById('menuOverlay');
+
+hamburgerBtn.addEventListener('click', () => {
+  const isOpen = menuOverlay.classList.toggle('open');
+  hamburgerBtn.classList.toggle('open', isOpen);
+  document.body.style.overflow = isOpen ? 'hidden' : '';
+});
+
+function closeMenu() {
+  menuOverlay.classList.remove('open');
+  hamburgerBtn.classList.remove('open');
+  document.body.style.overflow = '';
+}
+// オーバーレイ背景クリックで閉じる
+menuOverlay.addEventListener('click', e => {
+  if (e.target === menuOverlay) closeMenu();
+});
+
+/* ══════════════════════════════════════════
+   花びら
+══════════════════════════════════════════ */
+(function(){
+  const c = document.getElementById('petals');
+  for(let i=0;i<28;i++){
+    const p = document.createElement('div'); p.className = 'petal';
+    const sz = 4 + Math.random()*9;
+    p.style.cssText = `left:${Math.random()*100}%;width:${sz}px;height:${sz}px;`
+      +`animation-duration:${6+Math.random()*10}s;animation-delay:${Math.random()*12}s;`
+      +`opacity:${0.3+Math.random()*0.7};`;
+    c.appendChild(p);
+  }
+})();
+
+/* ══════════════════════════════════════════
+   CAROUSEL SLIDER（無限ループ・矢印なし）
+   clone方式: 前後にクローンを置いてtransition終了後に瞬間移動
+══════════════════════════════════════════ */
+const carouselItems = [
+  { label:'14th Single', title:'The growing up train', img:'images/mv_photo/The_growing_up_train.jpg', url:'https://www.youtube.com/watch?v=Rk54JNn7Qw4&list=RDRk54JNn7Qw4&start_radio=1' },
+  { label:'13th Single', title:'Unhappy birthday構文', img:'images/mv_photo/Unhappy_birthday.jpg', url:'https://www.youtube.com/watch?v=hBfDlIN0WtI&list=RDhBfDlIN0WtI&start_radio=1' },
+  { label:'12th Single', title:'Make or Break', img:'images/mv_photo/make_or_break.jpg', url:'https://www.youtube.com/watch?v=nTxTTZ0QLrI&list=RDnTxTTZ0QLrI&start_radio=1' },
+  { label:'Blog',        title:'山﨑 天「あったかくなってきたかもね」', img:'blog_page/images/blog_ten_01.png', url:'https://sakurazaka46.com/s/s46/diary/detail/68056?ima=0000&cd=blog' },
+  { label:'Blog',        title:'井上 梨名「いのりぶろぐ」', img:'blog_page/images/blog_inoue_01.png', url:'https://sakurazaka46.com/s/s46/diary/detail/68054?ima=0000&cd=blog' },
+  { label:'Schedule',    title:'5th YEAR ANNIVERSARY LIVE 開催！', img:'images/live_photo/live_5thAniv.png', url:'https://sakurazaka46.com/s/s46/page/5th_anniversary' },
+];
+
+const N         = carouselItems.length;
+const track     = document.getElementById('carouselTrack');
+const dotsWrap  = document.getElementById('carouselDots');
+let realIdx     = 0;   // 本物のインデックス (0 〜 N-1)
+let trackIdx    = N;   // track上の位置 (clone分 N offset)
+let autoTimer   = null;
+let isTransitioning = false;
+let isDragging  = false;
+let dragStartX  = 0;
+let dragDelta   = 0;
+
+// スライドHTML生成ヘルパー
+function makeSlideHTML(item) {
+  return `<img src="${item.img ?? `https://img.youtube.com/vi/${item.vid}/mqdefault.jpg`}" alt="${item.title}" draggable="false">
+    <div class="carousel-slide-overlay">
+      <span class="carousel-slide-label">${item.label}</span>
+      <span class="carousel-slide-title">${item.title}</span>
+    </div>`;
+}
+
+// [末尾クローン N枚] + [本体 N枚] + [先頭クローン N枚] の順で配置
+const allItems = [...carouselItems, ...carouselItems, ...carouselItems];
+allItems.forEach((item, i) => {
+  const a       = document.createElement('a');
+  a.className   = 'carousel-slide';
+  a.href        = item.url;
+  a.innerHTML   = makeSlideHTML(item);
+  // クローンはリンク無効化
+  if (i < N || i >= N * 2) { a.addEventListener('click', e => e.preventDefault()); }
+  track.appendChild(a);
+});
+
+// ドット（本体分のみ）
+carouselItems.forEach((_, i) => {
+  const dot = document.createElement('div');
+  dot.className = 'carousel-dot';
+  dot.addEventListener('click', () => goTo(i));
+  dotsWrap.appendChild(dot);
+});
+
+const allSlides = Array.from(track.querySelectorAll('.carousel-slide'));
+const dots      = Array.from(dotsWrap.querySelectorAll('.carousel-dot'));
+
+// スライド幅 + gap を計算
+function getSlideStep() {
+  const sw  = allSlides[0].offsetWidth;
+  const gap = sw * (-0.04) * 2; // margin: 0 -2vw の両側
+  return sw + gap;
+}
+
+// transform を設定（trackIdx 基準）
+function setPos(idx, animate) {
+  const step  = getSlideStep();
+  const cw    = track.parentElement.clientWidth;
+  const sw    = allSlides[0].offsetWidth;
+  const pos   = -(idx * step) + (cw / 2 - sw / 2);
+  track.style.transition = animate ? 'transform .5s cubic-bezier(.4,0,.2,1)' : 'none';
+  track.style.transform  = `translateX(${pos}px)`;
+}
+
+// active / adjacent クラスを更新
+function updateClasses() {
+  allSlides.forEach((s, i) => {
+    s.classList.remove('active', 'adjacent');
+    if (i === trackIdx) s.classList.add('active');
+    else if (Math.abs(i - trackIdx) === 1) s.classList.add('adjacent');
+  });
+  dots.forEach((d, i) => d.classList.toggle('active', i === realIdx));
+}
+
+// 指定の realIdx へ移動
+function goTo(newReal, animate = true) {
+  if (isTransitioning && animate) return;
+  isTransitioning = true;
+
+  realIdx  = ((newReal % N) + N) % N;
+  trackIdx = realIdx + N;      // 本体ゾーン上の位置
+  setPos(trackIdx, animate);
+  updateClasses();
+  resetAuto();
+
+  if (!animate) { isTransitioning = false; return; }
+
+  track.addEventListener('transitionend', onTransitionEnd, { once: true });
+}
+
+function onTransitionEnd() {
+  isTransitioning = false;
+  // 端に来たら瞬間移動（ループ）
+  // trackIdx は常に N〜2N-1 の範囲なのでここでは何もしなくてよい
+  // → ドラッグで端を超えた場合のみ補正
+}
+
+// 前後へ進む
+function next() { goTo(realIdx + 1); }
+function prev() { goTo(realIdx - 1); }
+
+// 自動再生
+function startAuto() { autoTimer = setInterval(next, 4000); }
+function resetAuto()  { clearInterval(autoTimer); startAuto(); }
+
+// ── ドラッグ（マウス）──
+track.addEventListener('mousedown', e => {
+  isDragging = true; dragStartX = e.clientX; dragDelta = 0;
+  clearInterval(autoTimer);
+  track.style.transition = 'none';
+  track.classList.add('grabbing');
+});
+window.addEventListener('mousemove', e => {
+  if (!isDragging) return;
+  dragDelta = e.clientX - dragStartX;
+  const step = getSlideStep();
+  const cw   = track.parentElement.clientWidth;
+  const sw   = allSlides[0].offsetWidth;
+  const base = -(trackIdx * step) + (cw / 2 - sw / 2);
+  track.style.transform = `translateX(${base + dragDelta}px)`;
+});
+window.addEventListener('mouseup', () => {
+  if (!isDragging) return;
+  isDragging = false;
+  track.classList.remove('grabbing');
+  isTransitioning = false;
+  if      (dragDelta < -60) next();
+  else if (dragDelta >  60) prev();
+  else { setPos(trackIdx, true); startAuto(); }
+  dragDelta = 0;
+});
+
+// ── ドラッグ（タッチ）──
+track.addEventListener('touchstart', e => {
+  dragStartX = e.touches[0].clientX; dragDelta = 0;
+  clearInterval(autoTimer);
+  track.style.transition = 'none';
+}, { passive: true });
+track.addEventListener('touchmove', e => {
+  dragDelta = e.touches[0].clientX - dragStartX;
+  const step = getSlideStep();
+  const cw   = track.parentElement.clientWidth;
+  const sw   = allSlides[0].offsetWidth;
+  const base = -(trackIdx * step) + (cw / 2 - sw / 2);
+  track.style.transform = `translateX(${base + dragDelta}px)`;
+}, { passive: true });
+track.addEventListener('touchend', () => {
+  isTransitioning = false;
+  if      (dragDelta < -50) next();
+  else if (dragDelta >  50) prev();
+  else { setPos(trackIdx, true); startAuto(); }
+  dragDelta = 0;
+});
+
+// ドラッグ中リンクキャンセル
+track.addEventListener('click', e => {
+  if (Math.abs(dragDelta) > 10) e.preventDefault();
+}, true);
+
+// 初期化
+window.addEventListener('load', () => {
+  goTo(0, false);
+  startAuto();
+});
+window.addEventListener('resize', () => { setPos(trackIdx, false); });
+
+/* ══════════════════════════════════════════
+   NEWS TICKER
+══════════════════════════════════════════ */
+const newsItems=[
+  {date:'2026.02.23',tag:'LIVE',  text:'全国アリーナツアー2026 開催決定！',             url:'https://example.com/news/1'},
+  {date:'2026.02.20',tag:'SINGLE',text:'14th「The growing up train」配信中',            url:'https://example.com/news/2'},
+  {date:'2026.02.15',tag:'TV',    text:'「ミュージックステーション」3月7日出演決定',      url:'https://example.com/news/3'},
+  {date:'2026.02.10',tag:'EVENT', text:'握手会スケジュール更新！申込受付開始',            url:'https://example.com/news/4'},
+  {date:'2026.02.01',tag:'INFO',  text:'オフィシャルFC会員向けコンテンツ更新のお知らせ', url:'https://example.com/news/5'},
+];
+document.getElementById('newsTicker').innerHTML =
+  [...newsItems,...newsItems,...newsItems,...newsItems].map(n=>
+    `<div class="ticker-item" onclick="window.open('${n.url}','_blank')">
+       <span class="ticker-date">${n.date}</span>
+       <span class="ticker-tag">${n.tag}</span>
+       <span class="ticker-text">${n.text}</span>
+     </div>`).join('');
+
+/* ══════════════════════════════════════════
+   BLOG
+══════════════════════════════════════════ */
+const blogData=[
+  {member:'山崎 天',   date:'2026/02/23',title:'あったかくなってきたかもね', mainVid:'s7KjD_2BaIg', img:'blog_page/images/blog_ten_01.png', icon:'images/member_photo/yamasaki.png', url:'https://sakurazaka46.com/s/s46/diary/detail/68056?ima=0000&cd=blog'},
+  {member:'井上 梨名', date:'2026/02/23',title:'いのりぶろぐ', mainVid:'zRPdTQ3MMKY', img:'blog_page/images/blog_inoue_01.png', icon:'images/member_photo/inoue.png', url:'https://sakurazaka46.com/s/s46/diary/detail/68054?ima=0000&cd=blog'},
+  {member:'村山 美羽', date:'2026/02/22',title:'2/22', mainVid:'OFPRXTqyGT8', img:'blog_page/images/blog_murayama_01.png', icon:'images/member_photo/murayama.png', url:'https://sakurazaka46.com/s/s46/diary/detail/68044?ima=0000&cd=blog'},
+  {member:'遠藤 光莉', date:'2026/02/21',title:'#373. Addiction！', mainVid:'PF3s-JpW8gk', img:'blog_page/images/blog_enpika_01.png', icon:'images/member_photo/endo_h.png', url:'https://sakurazaka46.com/s/s46/diary/detail/68037?ima=0000&cd=blog'},
+  {member:'石森 璃花',date:'2026/02/21',title:'冬もそろそろ終わるかな、175', mainVid:'5MHf9RVjg9c', img:'blog_page/images/blog_rika_01.png', icon:'images/member_photo/ishimori.png', url:'https://sakurazaka46.com/s/s46/diary/detail/68040?ima=0000&cd=blog'},
+  {member:'稲熊 ひな', date:'2026/02/21',title:'忍者ひなまる', mainVid:'tnBbAvPfJv8', img:'blog_page/images/blog_hinamaru_01.png', icon:'images/member_photo/yamasaki.png', url:'https://sakurazaka46.com/s/s46/diary/detail/68039?ima=0000&cd=blog'},
+  {member:'松田 里奈', date:'2026/02/20',title:'#381 発売から1ヶ月', mainVid:'mD7r8ORdHPo', img:'blog_page/images/blog_inori_01.png', icon:'images/member_photo/matuda.png', url:'https://sakurazaka46.com/s/s46/diary/detail/68029?ima=0000&cd=blog'},
+  {member:'森田 ひかる', date:'2026/02/20',title:'The growing up train', mainVid:'RaJqFkI0bWw', img:'blog_page/images/blog_hikaru_01.png', icon:'images/member_photo/morita.png', url:'https://sakurazaka46.com/s/s46/diary/detail/68025?ima=0000&cd=blog'},
+];
+document.getElementById('blogTrack').innerHTML =
+  [...blogData, ...blogData, ...blogData].map(b => {
+    const thumbSrc = b.img ?? `https://img.youtube.com/vi/${b.mainVid}/mqdefault.jpg`;
+    const iconSrc  = b.icon ?? `https://img.youtube.com/vi/${b.mainVid}/default.jpg`;
+
+    return `
+      <a href="${b.url}" target="_blank" class="blog-card">
+        <div class="blog-thumb">
+          <img src="${thumbSrc}" alt="${b.member}" draggable="false">
+          <div class="blog-author">
+            <div class="blog-icon">
+              <img src="${iconSrc}" alt="${b.member}" draggable="false">
+            </div>
+            <span class="blog-author-name">${b.member}</span>
+          </div>
+        </div>
+        <div class="blog-meta">
+          <div class="blog-meta-top">
+            <span class="blog-meta-date">${b.date}</span>
+            <span class="blog-meta-member">${b.member}</span>
+          </div>
+          <p class="blog-title-text">${b.title}</p>
+        </div>
+      </a>
+    `;
+  }).join('');
+
+/* ══════════════════════════════════════════
+   MUSIC VIDEO
+══════════════════════════════════════════ */
+const mvData=[
+  {single:'14th.Single',title:'The growing up train', img:'images/mv_photo/The_growing_up_train.jpg', url:'https://www.youtube.com/watch?v=Rk54JNn7Qw4'},
+  {single:'13th.Single',title:'Unhappy birthday構文',  img:'images/mv_photo/Unhappy_birthday.jpg', url:'https://www.youtube.com/watch?v=hBfDlIN0WtI'},
+  {single:'12th.Single',title:'Make or Break',  img:'images/mv_photo/make_or_break.jpg', url:'https://www.youtube.com/watch?v=nTxTTZ0QLrI'},
+  {single:'11th.Single',title:'UDAGAWA GENERATION',  img:'images/mv_photo/UDAGAWA.jpg', url:'https://www.youtube.com/watch?v=qP52sh7PzYA'},
+  {single:'10th.Single',title:'I want tomorrow to come',  img:'images/mv_photo/I_want.jpg', url:'https://www.youtube.com/watch?v=07JLD3d1-W0'},
+  {single:'9th.Single', title:'自業自得',  img:'images/mv_photo/zigouzitoku.jpg', url:'https://www.youtube.com/watch?v=Rs-Y9MtHsoo'},
+  {single:'8th.Single', title:'何歳の頃に戻りたいのか',  img:'images/mv_photo/ikumodo.jpg', url:'https://www.youtube.com/watch?v=7xx66mR_HeE'},
+  {single:'7th.Single', title:'承認欲求',  img:'images/mv_photo/syonin.jpg', url:'https://www.youtube.com/watch?v=x_BjvhMW9TE'},
+  {single:'6th.Single', title:'Start Over!',  img:'images/mv_photo/startover.jpg', url:'https://www.youtube.com/watch?v=YJRFD1AdaUE'},
+  {single:'5th.Single', title:'桜月',  img:'images/mv_photo/startover.jpg', url:'https://www.youtube.com/watch?v=zKLgrxHDgls'},
+  {single:'4th.Single', title:'五月雨よ',  img:'images/mv_photo/samidare.jpg', url:'https://www.youtube.com/watch?v=3boaeE3dwMs'},
+  {single:'3rd.Single', title:'流れ弾',  img:'images/mv_photo/nagaredama.jpg', url:'https://www.youtube.com/watch?v=drCopBcrxRM'},
+  {single:'2nd.Single', title:'BAN',  img:'images/mv_photo/ban.jpg', url:'https://www.youtube.com/watch?v=fPZ37t3nvco'},
+  {single:'1st.Single', title:"Nobody's fault", img:'images/mv_photo/nobafo.jpg', url:'https://www.youtube.com/watch?v=fagRTasDcKo'},
+];
+document.getElementById('mvTrack').innerHTML =
+  [...mvData, ...mvData, ...mvData].map(m => {
+
+    const thumbSrc =
+      m.img ?? 'images/mv_photo/default.jpg';
+
+    return `
+      <a href="${m.url}" target="_blank" class="mv-card">
+        <div class="mv-thumb">
+          <img
+            src="${thumbSrc}"
+            alt="${m.title}"
+            draggable="false"
+            onerror="this.onerror=null; this.src='images/mv_photo/default.jpg';"
+          >
+          <div class="mv-play-overlay">
+            <div class="mv-play-btn"></div>
+          </div>
+        </div>
+        <div class="mv-info">
+          <p class="mv-single-label">${m.single}</p>
+          <p class="mv-song-title">${m.title}</p>
+        </div>
+      </a>
+    `;
+  }).join('');
+
+/* ══════════════════════════════════════════
+   YOUTUBE
+══════════════════════════════════════════ */
+const ytChannels=[
+  { name:'櫻坂46 OFFICIAL YouTube CHANNEL', url:'https://www.youtube.com/@sakurazaka46',
+    videos:[
+      {title:"櫻坂46『The growing up train』MUSIC VIDEO",               vid:'mD7r8ORdHPo',url:'https://www.youtube.com/watch?v=mD7r8ORdHPo'},
+      {title:"櫻坂46『そこ曲がったら、櫻坂？』Blu-rayシリーズ第三弾　予告編",vid:'RaJqFkI0bWw',url:'https://www.youtube.com/watch?v=RaJqFkI0bWw'},
+    ]
+  },
+  { name:'櫻坂チャンネル', url:'https://www.youtube.com/@sakurazaka46sub',
+    videos:[
+      {title:'【レゴ】的野美青が実家の大量のレゴで生写真ガチャ機製作！【構造解説】',vid:'tnBbAvPfJv8',url:'https://www.youtube.com/watch?v=tnBbAvPfJv8'},
+      {title:'【勝又持ち込み企画】イラストから料理を連想！チーム対抗クッキング対決！',vid:'OFPRXTqyGT8',url:'https://www.youtube.com/watch?v=OFPRXTqyGT8'},
+    ]
+  },
+];
+document.getElementById('ytChannels').innerHTML = ytChannels.map(ch=>
+  `<div class="yt-channel-block">
+     <div class="yt-channel-header">
+       <span class="yt-channel-name">${ch.name}</span>
+       <a href="${ch.url}" target="_blank" class="yt-icon-btn">
+         <svg viewBox="0 0 24 24"><path d="M21.8 8s-.2-1.4-.8-2c-.8-.8-1.6-.8-2-.9C17 5 12 5 12 5s-5 0-7 .1c-.4.1-1.2.1-2 .9-.6.6-.8 2-.8 2S2 9.6 2 11.2v1.5c0 1.6.2 3.2.2 3.2s.2 1.4.8 2c.8.8 1.8.7 2.3.8C7 18.8 12 19 12 19s5 0 7-.1c.4-.1 1.2-.1 2-.9.6-.6.8-2 .8-2s.2-1.6.2-3.2v-1.5C22 9.6 21.8 8 21.8 8zM9.7 14.5V9.5l5.4 2.5-5.4 2.5z"/></svg>
+       </a>
+     </div>
+     <div class="yt-videos">
+       ${ch.videos.map(v=>`
+         <a href="${v.url}" target="_blank" class="yt-video-card">
+           <div class="yt-video-thumb"><img src="https://img.youtube.com/vi/${v.vid}/mqdefault.jpg" alt="${v.title}"></div>
+           <p class="yt-video-title">${v.title}</p>
+         </a>`).join('')}
+     </div>
+   </div>`).join('');
+
+/* ══════════════════════════════════════════
+   MEMBER
+══════════════════════════════════════════ */
+const memberData=[
+  { gen:2, label:'櫻坂46 二期生', members:[
+    {name:'井上 梨名', ruby:'いのうえ りな',  vid:'OFPRXTqyGT8', img:'images/member_photo/inoue.png', id:'inoue-rina'},
+    {name:'遠藤 光莉', ruby:'遠藤 ひかり',    vid:'PF3s-JpW8gk', img:'images/member_photo/endo_h.png', id:'endo=hikari'},
+    {name:'大園 玲', ruby:'おおぞの れい',  vid:'s7KjD_2BaIg', img:'images/member_photo/ozono.png', id:'ozono-rei'},
+    {name:'大沼 晶保',ruby:'おおぬま あきほ', vid:'5MHf9RVjg9c', img:'images/member_photo/onuma.png', id:'onuma-akiho'},
+    {name:'幸阪 茉里乃', ruby:'こうさか まりの',    vid:'zRPdTQ3MMKY', img:'images/member_photo/kousaka.png', id:'kousaka-marino'},
+    {name:'武本 唯衣', ruby:'たけもと ゆい',      vid:'tnBbAvPfJv8', img:'images/member_photo/takemoto.png', id:'takemoto-yui'},
+    {name:'田村 保乃', ruby:'たむら ほの',  vid:'mD7r8ORdHPo', img:'images/member_photo/tamura.png', id:'tamura-hono'},
+    {name:'藤吉 夏鈴', ruby:'ふじよし かりん',    vid:'RaJqFkI0bWw', img:'images/member_photo/huziyosi.png', id:'huziyosi-karin'},
+    {name:'増本 綺良', ruby:'ますもと きら',    vid:'RaJqFkI0bWw', img:'images/member_photo/masumoto.png', id:'masumoto-kira'},
+    {name:'松田 里奈', ruby:'まつだ りな',      vid:'hCzCTdqAT9s', img:'images/member_photo/matuda.png', id:'matuda-rina'},
+    {name:'森田 ひかる',ruby:'もりた ひかる', vid:'5MHf9RVjg9c', img:'images/member_photo/morita.png', id:'morita-hikaru'},
+    {name:'守屋 麗奈', ruby:'もりや れな',      vid:'OFPRXTqyGT8', img:'images/member_photo/moriya.png', id:'moriya-rena'},
+    {name:'山﨑 天',   ruby:'やまさき てん',    vid:'s7KjD_2BaIg', img:'images/member_photo/yamasaki.png', id:'inoue-rina'},
+  ]},
+  { gen:3, label:'櫻坂46 三期生', members:[
+    {name:'石森 璃花', ruby:'いしもり りか',    vid:'mD7r8ORdHPo', img:'images/member_photo/ishimori.png', id:'ishimori-rika'},
+    {name:'遠藤 理子', ruby:'えんどう りこ',    vid:'tnBbAvPfJv8', img:'images/member_photo/endo_r.png', id:'endo-riko'},
+    {name:'小田倉 麗奈',ruby:'おだくら れいな',   vid:'mD7r8ORdHPo', img:'images/member_photo/odakura.png', id:'odakura-rena'},
+    {name:'小島 凪紗', ruby:'こじま なぎさ',    vid:'hCzCTdqAT9s', img:'images/member_photo/kozima.png', id:'kojima-nagisa'},
+    {name:'谷口 愛李', ruby:'たにぐち あいり',    vid:'hCzCTdqAT9s', img:'images/member_photo/taniguti.png', id:'taniguti-airi'},
+    {name:'中嶋 優月', ruby:'なかしま ゆずき',  vid:'OFPRXTqyGT8', img:'images/member_photo/nakasima.png', id:'nakashima-yuzuki'},
+    {name:'的野 美青', ruby:'まとの みお',      vid:'RaJqFkI0bWw', img:'images/member_photo/matono.png', id:'matono-mio'},
+    {name:'向井 純葉', ruby:'むかい いとは',    vid:'hCzCTdqAT9s', img:'images/member_photo/mukai.png', id:'mukai-itoha'},
+    {name:'村井 優', ruby:'むらい ゆう',  vid:'OFPRXTqyGT8', img:'images/member_photo/murai.png', id:'murai-yu'},
+    {name:'村山 美羽', ruby:'むらやま みう',    vid:'PF3s-JpW8gk', img:'images/member_photo/murayama.png', id:'murayama-miu'},
+    {name:'山下 瞳月', ruby:'やました しづき',  vid:'5MHf9RVjg9c', img:'images/member_photo/yamasita.png', id:'yamashita-shizuki'},
+  ]},
+  { gen:4, label:'櫻坂46 四期生', members:[
+    {name:'浅井 恋乃未', ruby:'あさい このみ', vid:'mD7r8ORdHPo', img:'images/member_photo/asai.png', id:'asai-konomi'},
+    {name:'稲熊 ひな', ruby:'いなぐま ひな', vid:'RaJqFkI0bWw', img:'images/member_photo/inaguma.png', id:'inaguma-hina'},
+    {name:'勝又 春',ruby:'かつまた はる', vid:'OFPRXTqyGT8', img:'images/member_photo/katumata.png', id:'katumata-haru'},
+    {name:'佐藤 愛桜', ruby:'さとう ねお', vid:'PF3s-JpW8gk', img:'images/member_photo/sato.png', id:'satou-neo'},
+    {name:'中川 智尋', ruby:'なかがわ ちひろ', vid:'s7KjD_2BaIg', img:'images/member_photo/nakagawa.png', id:'nakagawa-tihiro'},
+    {name:'松本 和子',ruby:'まつもと わこ', vid:'5MHf9RVjg9c', img:'images/member_photo/matumoto.png', id:'matumoto-wako'},
+    {name:'目黒 陽色', ruby:'めぐろ ひいろ', vid:'zRPdTQ3MMKY', img:'images/member_photo/meguro.png', id:'meguro-hiiro'},
+    {name:'山川 宇衣', ruby:'やまかわ うい', vid:'tnBbAvPfJv8', img:'images/member_photo/yamakawa.png', id:'yamakawa-ui'},
+    {name:'山田 桃実', ruby:'やまだ ももみ', vid:'tnBbAvPfJv8', img:'images/member_photo/yamada.png', id:'yamada-momomi'},
+  ]},
+];
+const MEMBER_PHOTO_DIR = 'images/member_photo';
+
+function getMemberPhotoSrc(m) {
+  // 明示指定（あなたは img を使ってる）
+  if (m.img) return m.img;
+
+  // 予備（もし photo を使うなら）
+  if (m.photo) return m.photo;
+
+  // id.png の自動推測
+  if (m.id) return `${MEMBER_PHOTO_DIR}/${m.id}.png`;
+
+  // fallback
+  return `https://img.youtube.com/vi/${m.vid}/mqdefault.jpg`;
+}
+
+document.getElementById('memberContent').innerHTML = memberData.map(g=>`
+  <div class="member-gen-block gen-${g.gen}">
+    <div class="member-gen-header">
+      <span class="member-gen-label">${g.label}</span>
+      <div class="member-gen-divider"></div>
+    </div>
+    <div class="member-grid">
+      ${g.members.map(m=>`
+        <a href="member_detail.html?id=${m.id}" class="member-card">
+          <div class="member-photo">
+            <img
+              src="${getMemberPhotoSrc(m)}"
+              alt="${m.name}"
+              draggable="false"
+              onerror="this.onerror=null; this.src='https://img.youtube.com/vi/${m.vid}/mqdefault.jpg';"
+            >
+          </div>
+          <div class="member-info">
+            <p class="member-name-ja">${m.name}</p>
+            <p class="member-name-ruby">${m.ruby}</p>
+          </div>
+        </a>
+      `).join('')}
+    </div>
+  </div>
+`).join('');
+
+/* ══════════════════════════════════════════
+   DRAG SCROLL（Blog・MV共通）
+══════════════════════════════════════════ */
+function makeDragScroll(outerEl, trackEl) {
+  let isDragging=false, startX=0, scrollLeft=0, dragDelta=0, clickBlocked=false;
+  function freezeAnim(){
+    const mx = new DOMMatrix(window.getComputedStyle(trackEl).transform).m41;
+    trackEl.style.animationPlayState='paused';
+    trackEl.style.transform=`translateX(${mx}px)`;
+    return mx;
+  }
+  function resumeAnim(){ trackEl.style.animationPlayState='running'; trackEl.style.transform=''; }
+
+  outerEl.addEventListener('mousedown',e=>{
+    isDragging=true; clickBlocked=false; dragDelta=0;
+    startX=e.clientX; scrollLeft=freezeAnim();
+    outerEl.classList.add('dragging');
+  });
+  window.addEventListener('mousemove',e=>{
+    if(!isDragging)return;
+    dragDelta=e.clientX-startX;
+    trackEl.style.transform=`translateX(${scrollLeft+dragDelta}px)`;
+  });
+  window.addEventListener('mouseup',()=>{
+    if(!isDragging)return;
+    isDragging=false; outerEl.classList.remove('dragging');
+    if(Math.abs(dragDelta)>5)clickBlocked=true;
+    resumeAnim();
+  });
+  outerEl.addEventListener('click',e=>{ if(clickBlocked){e.preventDefault();clickBlocked=false;} },true);
+
+  outerEl.addEventListener('touchstart',e=>{
+    isDragging=true; clickBlocked=false; dragDelta=0;
+    startX=e.touches[0].clientX; scrollLeft=freezeAnim();
+  },{passive:true});
+  outerEl.addEventListener('touchmove',e=>{
+    if(!isDragging)return;
+    dragDelta=e.touches[0].clientX-startX;
+    trackEl.style.transform=`translateX(${scrollLeft+dragDelta}px)`;
+  },{passive:true});
+  outerEl.addEventListener('touchend',()=>{
+    if(!isDragging)return;
+    isDragging=false;
+    if(Math.abs(dragDelta)>5)clickBlocked=true;
+    resumeAnim();
+  });
+}
+makeDragScroll(document.getElementById('blogOuter'), document.getElementById('blogTrack'));
+makeDragScroll(document.getElementById('mvOuter'),   document.getElementById('mvTrack'));
+</script>
+</body>
+</html>
