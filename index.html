@@ -786,35 +786,52 @@ document.getElementById('mvTrack').innerHTML =
    YOUTUBE
 ══════════════════════════════════════════ */
 const ytChannels=[
-  { name:'櫻坂46 OFFICIAL YouTube CHANNEL', url:'https://www.youtube.com/@sakurazaka46',
+  { name:'櫻坂46 OFFICIAL YouTube CHANNEL', url:'https://www.youtube.com/@sakurazaka46SMEJ',
     videos:[
-      {title:"櫻坂46『The growing up train』MUSIC VIDEO",               vid:'mD7r8ORdHPo',url:'https://www.youtube.com/watch?v=mD7r8ORdHPo'},
-      {title:"櫻坂46『そこ曲がったら、櫻坂？』Blu-rayシリーズ第三弾　予告編",vid:'RaJqFkI0bWw',url:'https://www.youtube.com/watch?v=RaJqFkI0bWw'},
+      {title:"櫻坂46『The growing up train』MUSIC VIDEO", img:'images/mv_photo/The_growing_up_train.jpg', url:'https://www.youtube.com/watch?v=Rk54JNn7Qw4'},
+      {title:"櫻坂46『そこ曲がったら、櫻坂？』Blu-rayシリーズ第三弾　予告編",img:'youtube_page/images/youtube_sokosaku_03.png', url:'https://www.youtube.com/watch?v=2Sqs7g28kTE&embeds_referring_euri=https%3A%2F%2Fsakurazaka46.com%2F'},
     ]
   },
-  { name:'櫻坂チャンネル', url:'https://www.youtube.com/@sakurazaka46sub',
+  { name:'櫻坂チャンネル', url:'https://www.youtube.com/@sakurazakachannel',
     videos:[
-      {title:'【レゴ】的野美青が実家の大量のレゴで生写真ガチャ機製作！【構造解説】',vid:'tnBbAvPfJv8',url:'https://www.youtube.com/watch?v=tnBbAvPfJv8'},
-      {title:'【勝又持ち込み企画】イラストから料理を連想！チーム対抗クッキング対決！',vid:'OFPRXTqyGT8',url:'https://www.youtube.com/watch?v=OFPRXTqyGT8'},
+      {title:'【忍者】稲熊ひなの忍への道！目指せ免許皆伝！ 【ひなまる】', img:'youtube_page/images/youtube_samune_inaguma.png', url:'https://www.youtube.com/watch?v=mFdnf9bmDww'},
+      {title:'【レゴ】的野美青が実家の大量のレゴで生写真ガチャ機製作！【構造解説】', img:'youtube_page/images/youtube_samune_rego.png', url:'https://www.youtube.com/watch?v=r0Nczg08acY&t=110s'},
     ]
   },
 ];
-document.getElementById('ytChannels').innerHTML = ytChannels.map(ch=>
+document.getElementById('ytChannels').innerHTML = ytChannels.map(ch =>
   `<div class="yt-channel-block">
      <div class="yt-channel-header">
        <span class="yt-channel-name">${ch.name}</span>
        <a href="${ch.url}" target="_blank" class="yt-icon-btn">
-         <svg viewBox="0 0 24 24"><path d="M21.8 8s-.2-1.4-.8-2c-.8-.8-1.6-.8-2-.9C17 5 12 5 12 5s-5 0-7 .1c-.4.1-1.2.1-2 .9-.6.6-.8 2-.8 2S2 9.6 2 11.2v1.5c0 1.6.2 3.2.2 3.2s.2 1.4.8 2c.8.8 1.8.7 2.3.8C7 18.8 12 19 12 19s5 0 7-.1c.4-.1 1.2-.1 2-.9.6-.6.8-2 .8-2s.2-1.6.2-3.2v-1.5C22 9.6 21.8 8 21.8 8zM9.7 14.5V9.5l5.4 2.5-5.4 2.5z"/></svg>
+         <svg viewBox="0 0 24 24">
+           <path d="M21.8 8s-.2-1.4-.8-2c-.8-.8-1.6-.8-2-.9C17 5 12 5 12 5s-5 0-7 .1c-.4.1-1.2.1-2 .9-.6.6-.8 2-.8 2S2 9.6 2 11.2v1.5c0 1.6.2 3.2.2 3.2s.2 1.4.8 2c.8.8 1.8.7 2.3.8C7 18.8 12 19 12 19s5 0 7-.1c.4-.1 1.2-.1 2-.9.6-.6.8-2 .8-2s.2-1.6.2-3.2v-1.5C22 9.6 21.8 8 21.8 8zM9.7 14.5V9.5l5.4 2.5-5.4 2.5z"/>
+         </svg>
        </a>
      </div>
      <div class="yt-videos">
-       ${ch.videos.map(v=>`
-         <a href="${v.url}" target="_blank" class="yt-video-card">
-           <div class="yt-video-thumb"><img src="https://img.youtube.com/vi/${v.vid}/mqdefault.jpg" alt="${v.title}"></div>
-           <p class="yt-video-title">${v.title}</p>
-         </a>`).join('')}
+       ${ch.videos.map(v => {
+
+         const thumbSrc =
+           v.img ??
+           (v.vid ? `https://img.youtube.com/vi/${v.vid}/mqdefault.jpg` : 'youtube_page/images/default.jpg');
+
+         return `
+           <a href="${v.url}" target="_blank" class="yt-video-card">
+             <div class="yt-video-thumb">
+               <img
+                 src="${thumbSrc}"
+                 alt="${v.title}"
+                 onerror="this.onerror=null; this.src='youtube_page/images/default.jpg';"
+               >
+             </div>
+             <p class="yt-video-title">${v.title}</p>
+           </a>
+         `;
+       }).join('')}
      </div>
-   </div>`).join('');
+   </div>`
+).join('');
 
 /* ══════════════════════════════════════════
    MEMBER
