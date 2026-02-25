@@ -374,11 +374,12 @@ footer { text-align:center; padding:32px 20px; border-top:1px solid #eee; font-s
 <nav id="mainNav">
   <a href="#top" class="nav-logo">櫻坂４６</a>
   <ul class="nav-pc-links">
-    <li><a href="news.html">News</a></li>
-    <li><a href="blog.html">Blog</a></li>
-    <li><a href="music.html">Music Video</a></li>
-    <li><a href="youtube.html">YouTube</a></li>
-    <li><a href="member.html">Member</a></li>
+    <li><a href="./news_page/news.html">News</a></li>
+    <li><a href="./blog_page/blog.html">Blog</a></li>
+    <li><a href="./music_page/music.html">Music Video</a></li>
+    <li><a href="./youtube_page/youtube.html">YouTube</a></li>
+    <li><a href="./member_page/member.html">Member</a></li>
+    <li><a href="./schedule_page/schedule.html">Schedule</a></li>
   </ul>
   <button class="hamburger-btn" id="hamburgerBtn" aria-label="メニューを開く">
     <span></span><span></span><span></span>
@@ -391,12 +392,12 @@ footer { text-align:center; padding:32px 20px; border-top:1px solid #eee; font-s
     <span>櫻坂４６</span>
   </div>
   <div class="menu-items">
-    <a class="menu-item" href="news.html"     onclick="closeMenu()">News</a>
-    <a class="menu-item" href="blog.html"     onclick="closeMenu()">Blog</a>
-    <a class="menu-item" href="music.html"    onclick="closeMenu()">Music Video</a>
-    <a class="menu-item" href="youtube.html"  onclick="closeMenu()">YouTube</a>
-    <a class="menu-item" href="member.html"   onclick="closeMenu()">Member</a>
-    <a class="menu-item" href="schedule.html" onclick="closeMenu()">Schedule</a>
+    <a class="menu-item" href="./news_page/news.html"         onclick="closeMenu()">News</a>
+    <a class="menu-item" href="./blog_page/blog.html"         onclick="closeMenu()">Blog</a>
+    <a class="menu-item" href="./music_page/music.html"       onclick="closeMenu()">Music Video</a>
+    <a class="menu-item" href="./youtube_page/youtube.html"   onclick="closeMenu()">YouTube</a>
+    <a class="menu-item" href="./member_page/member.html"     onclick="closeMenu()">Member</a>
+    <a class="menu-item" href="./schedule_page/schedule.html" onclick="closeMenu()">Schedule</a>
   </div>
 </div>
 
@@ -700,14 +701,14 @@ document.getElementById('newsTicker').innerHTML =
    BLOG
 ══════════════════════════════════════════ */
 const blogData=[
-  {member:'山崎 天',   date:'2026/02/23',title:'あったかくなってきたかもね', mainVid:'s7KjD_2BaIg', img:'blog_page/images/blog_ten_01.png', icon:'images/member_photo/yamasaki.png', url:'https://sakurazaka46.com/s/s46/diary/detail/68056?ima=0000&cd=blog'},
-  {member:'井上 梨名', date:'2026/02/23',title:'いのりぶろぐ', mainVid:'zRPdTQ3MMKY', img:'blog_page/images/blog_inoue_01.png', icon:'images/member_photo/inoue.png', url:'https://sakurazaka46.com/s/s46/diary/detail/68054?ima=0000&cd=blog'},
-  {member:'村山 美羽', date:'2026/02/22',title:'2/22', mainVid:'OFPRXTqyGT8', img:'blog_page/images/blog_murayama_01.png', icon:'images/member_photo/murayama.png', url:'https://sakurazaka46.com/s/s46/diary/detail/68044?ima=0000&cd=blog'},
-  {member:'遠藤 光莉', date:'2026/02/21',title:'#373. Addiction！', mainVid:'PF3s-JpW8gk', img:'blog_page/images/blog_enpika_01.png', icon:'images/member_photo/endo_h.png', url:'https://sakurazaka46.com/s/s46/diary/detail/68037?ima=0000&cd=blog'},
-  {member:'石森 璃花',date:'2026/02/21',title:'冬もそろそろ終わるかな、175', mainVid:'5MHf9RVjg9c', img:'blog_page/images/blog_rika_01.png', icon:'images/member_photo/ishimori.png', url:'https://sakurazaka46.com/s/s46/diary/detail/68040?ima=0000&cd=blog'},
-  {member:'稲熊 ひな', date:'2026/02/21',title:'忍者ひなまる', mainVid:'tnBbAvPfJv8', img:'blog_page/images/blog_hinamaru_01.png', icon:'images/member_photo/yamasaki.png', url:'https://sakurazaka46.com/s/s46/diary/detail/68039?ima=0000&cd=blog'},
-  {member:'松田 里奈', date:'2026/02/20',title:'#381 発売から1ヶ月', mainVid:'mD7r8ORdHPo', img:'blog_page/images/blog_inori_01.png', icon:'images/member_photo/matuda.png', url:'https://sakurazaka46.com/s/s46/diary/detail/68029?ima=0000&cd=blog'},
-  {member:'森田 ひかる', date:'2026/02/20',title:'The growing up train', mainVid:'RaJqFkI0bWw', img:'blog_page/images/blog_hikaru_01.png', icon:'images/member_photo/morita.png', url:'https://sakurazaka46.com/s/s46/diary/detail/68025?ima=0000&cd=blog'},
+  {member:'山崎 天',   date:'2026/02/23',title:'あったかくなってきたかもね', img:'blog_page/images/blog_ten_01.png', icon:'images/member_photo/yamasaki.png', url:'https://sakurazaka46.com/s/s46/diary/detail/68056?ima=0000&cd=blog'},
+  {member:'井上 梨名', date:'2026/02/23',title:'いのりぶろぐ', img:'blog_page/images/blog_inoue_01.png', icon:'images/member_photo/inoue.png', url:'https://sakurazaka46.com/s/s46/diary/detail/68054?ima=0000&cd=blog'},
+  {member:'村山 美羽', date:'2026/02/22',title:'2/22', img:'blog_page/images/blog_murayama_01.png', icon:'images/member_photo/murayama.png', url:'https://sakurazaka46.com/s/s46/diary/detail/68044?ima=0000&cd=blog'},
+  {member:'遠藤 光莉', date:'2026/02/21',title:'#373. Addiction！', img:'blog_page/images/blog_enpika_01.png', icon:'images/member_photo/endo_h.png', url:'https://sakurazaka46.com/s/s46/diary/detail/68037?ima=0000&cd=blog'},
+  {member:'石森 璃花',date:'2026/02/21',title:'冬もそろそろ終わるかな、175', img:'blog_page/images/blog_rika_01.png', icon:'images/member_photo/ishimori.png', url:'https://sakurazaka46.com/s/s46/diary/detail/68040?ima=0000&cd=blog'},
+  {member:'稲熊 ひな', date:'2026/02/21',title:'忍者ひなまる', img:'blog_page/images/blog_hinamaru_01.png', icon:'images/member_photo/yamasaki.png', url:'https://sakurazaka46.com/s/s46/diary/detail/68039?ima=0000&cd=blog'},
+  {member:'松田 里奈', date:'2026/02/20',title:'#381 発売から1ヶ月', img:'blog_page/images/blog_inori_01.png', icon:'images/member_photo/matuda.png', url:'https://sakurazaka46.com/s/s46/diary/detail/68029?ima=0000&cd=blog'},
+  {member:'森田 ひかる', date:'2026/02/20',title:'The growing up train', img:'blog_page/images/blog_hikaru_01.png', icon:'images/member_photo/morita.png', url:'https://sakurazaka46.com/s/s46/diary/detail/68025?ima=0000&cd=blog'},
 ];
 document.getElementById('blogTrack').innerHTML =
   [...blogData, ...blogData, ...blogData].map(b => {
@@ -749,7 +750,7 @@ const mvData=[
   {single:'8th.Single', title:'何歳の頃に戻りたいのか',  img:'images/mv_photo/ikumodo.jpg', url:'https://www.youtube.com/watch?v=7xx66mR_HeE'},
   {single:'7th.Single', title:'承認欲求',  img:'images/mv_photo/syonin.jpg', url:'https://www.youtube.com/watch?v=x_BjvhMW9TE'},
   {single:'6th.Single', title:'Start Over!',  img:'images/mv_photo/startover.jpg', url:'https://www.youtube.com/watch?v=YJRFD1AdaUE'},
-  {single:'5th.Single', title:'桜月',  img:'images/mv_photo/startover.jpg', url:'https://www.youtube.com/watch?v=zKLgrxHDgls'},
+  {single:'5th.Single', title:'桜月',  img:'images/mv_photo/sakuraduki.jpg', url:'https://www.youtube.com/watch?v=zKLgrxHDgls'},
   {single:'4th.Single', title:'五月雨よ',  img:'images/mv_photo/samidare.jpg', url:'https://www.youtube.com/watch?v=3boaeE3dwMs'},
   {single:'3rd.Single', title:'流れ弾',  img:'images/mv_photo/nagaredama.jpg', url:'https://www.youtube.com/watch?v=drCopBcrxRM'},
   {single:'2nd.Single', title:'BAN',  img:'images/mv_photo/ban.jpg', url:'https://www.youtube.com/watch?v=fPZ37t3nvco'},
@@ -838,58 +839,48 @@ document.getElementById('ytChannels').innerHTML = ytChannels.map(ch =>
 ══════════════════════════════════════════ */
 const memberData=[
   { gen:2, label:'櫻坂46 二期生', members:[
-    {name:'井上 梨名', ruby:'いのうえ りな',  vid:'OFPRXTqyGT8', img:'images/member_photo/inoue.png', id:'inoue-rina'},
-    {name:'遠藤 光莉', ruby:'遠藤 ひかり',    vid:'PF3s-JpW8gk', img:'images/member_photo/endo_h.png', id:'endo=hikari'},
-    {name:'大園 玲', ruby:'おおぞの れい',  vid:'s7KjD_2BaIg', img:'images/member_photo/ozono.png', id:'ozono-rei'},
-    {name:'大沼 晶保',ruby:'おおぬま あきほ', vid:'5MHf9RVjg9c', img:'images/member_photo/onuma.png', id:'onuma-akiho'},
-    {name:'幸阪 茉里乃', ruby:'こうさか まりの',    vid:'zRPdTQ3MMKY', img:'images/member_photo/kousaka.png', id:'kousaka-marino'},
-    {name:'武本 唯衣', ruby:'たけもと ゆい',      vid:'tnBbAvPfJv8', img:'images/member_photo/takemoto.png', id:'takemoto-yui'},
-    {name:'田村 保乃', ruby:'たむら ほの',  vid:'mD7r8ORdHPo', img:'images/member_photo/tamura.png', id:'tamura-hono'},
-    {name:'藤吉 夏鈴', ruby:'ふじよし かりん',    vid:'RaJqFkI0bWw', img:'images/member_photo/huziyosi.png', id:'huziyosi-karin'},
-    {name:'増本 綺良', ruby:'ますもと きら',    vid:'RaJqFkI0bWw', img:'images/member_photo/masumoto.png', id:'masumoto-kira'},
-    {name:'松田 里奈', ruby:'まつだ りな',      vid:'hCzCTdqAT9s', img:'images/member_photo/matuda.png', id:'matuda-rina'},
-    {name:'森田 ひかる',ruby:'もりた ひかる', vid:'5MHf9RVjg9c', img:'images/member_photo/morita.png', id:'morita-hikaru'},
-    {name:'守屋 麗奈', ruby:'もりや れな',      vid:'OFPRXTqyGT8', img:'images/member_photo/moriya.png', id:'moriya-rena'},
-    {name:'山﨑 天',   ruby:'やまさき てん',    vid:'s7KjD_2BaIg', img:'images/member_photo/yamasaki.png', id:'inoue-rina'},
+    {name:'井上 梨名',   ruby:'いのうえ りな',       vid:'OFPRXTqyGT8', img:'images/member_photo/inoue.png',    id:'inoue-rina',      page:'profile_inoue.html'},
+    {name:'遠藤 光莉',   ruby:'えんどう ひかり',     vid:'PF3s-JpW8gk', img:'images/member_photo/endo_h.png',   id:'endo-hikari',     page:'profile_endo_h.html'},
+    {name:'大園 玲',     ruby:'おおぞの れい',       vid:'s7KjD_2BaIg', img:'images/member_photo/ozono.png',    id:'ozono-rei',       page:'profile_ozono.html'},
+    {name:'大沼 晶保',   ruby:'おおぬま あきほ',     vid:'5MHf9RVjg9c', img:'images/member_photo/onuma.png',    id:'onuma-akiho',     page:'profile_onuma.html'},
+    {name:'幸阪 茉里乃', ruby:'こうさか まりの',     vid:'zRPdTQ3MMKY', img:'images/member_photo/kousaka.png',  id:'kousaka-marino',  page:'profile_kousaka.html'},
+    {name:'武本 唯衣',   ruby:'たけもと ゆい',       vid:'tnBbAvPfJv8', img:'images/member_photo/takemoto.png', id:'takemoto-yui',    page:'profile_takemoto.html'},
+    {name:'田村 保乃',   ruby:'たむら ほの',         vid:'mD7r8ORdHPo', img:'images/member_photo/tamura.png',   id:'tamura-hono',     page:'profile_tamura.html'},
+    {name:'藤吉 夏鈴',   ruby:'ふじよし かりん',     vid:'RaJqFkI0bWw', img:'images/member_photo/huziyosi.png', id:'huziyosi-karin',  page:'profile_huziyosi.html'},
+    {name:'増本 綺良',   ruby:'ますもと きら',       vid:'RaJqFkI0bWw', img:'images/member_photo/masumoto.png', id:'masumoto-kira',   page:'profile_masumoto.html'},
+    {name:'松田 里奈',   ruby:'まつだ りな',         vid:'hCzCTdqAT9s', img:'images/member_photo/matuda.png',   id:'matuda-rina',     page:'profile_matuda.html'},
+    {name:'森田 ひかる', ruby:'もりた ひかる',       vid:'5MHf9RVjg9c', img:'images/member_photo/morita.png',   id:'morita-hikaru',   page:'profile_morita.html'},
+    {name:'守屋 麗奈',   ruby:'もりや れな',         vid:'OFPRXTqyGT8', img:'images/member_photo/moriya.png',   id:'moriya-rena',     page:'profile_moriya.html'},
+    {name:'山﨑 天',     ruby:'やまさき てん',       vid:'s7KjD_2BaIg', img:'images/member_photo/yamasaki.png', id:'yamazaki-ten',    page:'profile_yamasaki.html'},
   ]},
   { gen:3, label:'櫻坂46 三期生', members:[
-    {name:'石森 璃花', ruby:'いしもり りか',    vid:'mD7r8ORdHPo', img:'images/member_photo/ishimori.png', id:'ishimori-rika'},
-    {name:'遠藤 理子', ruby:'えんどう りこ',    vid:'tnBbAvPfJv8', img:'images/member_photo/endo_r.png', id:'endo-riko'},
-    {name:'小田倉 麗奈',ruby:'おだくら れいな',   vid:'mD7r8ORdHPo', img:'images/member_photo/odakura.png', id:'odakura-rena'},
-    {name:'小島 凪紗', ruby:'こじま なぎさ',    vid:'hCzCTdqAT9s', img:'images/member_photo/kozima.png', id:'kojima-nagisa'},
-    {name:'谷口 愛李', ruby:'たにぐち あいり',    vid:'hCzCTdqAT9s', img:'images/member_photo/taniguti.png', id:'taniguti-airi'},
-    {name:'中嶋 優月', ruby:'なかしま ゆずき',  vid:'OFPRXTqyGT8', img:'images/member_photo/nakasima.png', id:'nakashima-yuzuki'},
-    {name:'的野 美青', ruby:'まとの みお',      vid:'RaJqFkI0bWw', img:'images/member_photo/matono.png', id:'matono-mio'},
-    {name:'向井 純葉', ruby:'むかい いとは',    vid:'hCzCTdqAT9s', img:'images/member_photo/mukai.png', id:'mukai-itoha'},
-    {name:'村井 優', ruby:'むらい ゆう',  vid:'OFPRXTqyGT8', img:'images/member_photo/murai.png', id:'murai-yu'},
-    {name:'村山 美羽', ruby:'むらやま みう',    vid:'PF3s-JpW8gk', img:'images/member_photo/murayama.png', id:'murayama-miu'},
-    {name:'山下 瞳月', ruby:'やました しづき',  vid:'5MHf9RVjg9c', img:'images/member_photo/yamasita.png', id:'yamashita-shizuki'},
+    {name:'石森 璃花',   ruby:'いしもり りか',       vid:'mD7r8ORdHPo', img:'images/member_photo/ishimori.png', id:'ishimori-rika',       page:'profile_ishimori.html'},
+    {name:'遠藤 理子',   ruby:'えんどう りこ',       vid:'tnBbAvPfJv8', img:'images/member_photo/endo_r.png',   id:'endo-riko',           page:''},
+    {name:'小田倉 麗奈', ruby:'おだくら れいな',     vid:'mD7r8ORdHPo', img:'images/member_photo/odakura.png',  id:'odakura-rena',        page:''},
+    {name:'小島 凪紗',   ruby:'こじま なぎさ',       vid:'hCzCTdqAT9s', img:'images/member_photo/kozima.png',   id:'kojima-nagisa',       page:''},
+    {name:'谷口 愛李',   ruby:'たにぐち あいり',     vid:'hCzCTdqAT9s', img:'images/member_photo/taniguti.png', id:'taniguti-airi',       page:''},
+    {name:'中嶋 優月',   ruby:'なかしま ゆずき',     vid:'OFPRXTqyGT8', img:'images/member_photo/nakasima.png', id:'nakashima-yuzuki',    page:''},
+    {name:'的野 美青',   ruby:'まとの みお',         vid:'RaJqFkI0bWw', img:'images/member_photo/matono.png',   id:'matono-mio',          page:''},
+    {name:'向井 純葉',   ruby:'むかい いとは',       vid:'hCzCTdqAT9s', img:'images/member_photo/mukai.png',    id:'mukai-itoha',         page:''},
+    {name:'村井 優',     ruby:'むらい ゆう',         vid:'OFPRXTqyGT8', img:'images/member_photo/murai.png',    id:'murai-yu',            page:''},
+    {name:'村山 美羽',   ruby:'むらやま みう',       vid:'PF3s-JpW8gk', img:'images/member_photo/murayama.png', id:'murayama-miu',        page:''},
+    {name:'山下 瞳月',   ruby:'やました しづき',     vid:'5MHf9RVjg9c', img:'images/member_photo/yamasita.png', id:'yamashita-shizuki',   page:''},
   ]},
   { gen:4, label:'櫻坂46 四期生', members:[
-    {name:'浅井 恋乃未', ruby:'あさい このみ', vid:'mD7r8ORdHPo', img:'images/member_photo/asai.png', id:'asai-konomi'},
-    {name:'稲熊 ひな', ruby:'いなぐま ひな', vid:'RaJqFkI0bWw', img:'images/member_photo/inaguma.png', id:'inaguma-hina'},
-    {name:'勝又 春',ruby:'かつまた はる', vid:'OFPRXTqyGT8', img:'images/member_photo/katumata.png', id:'katumata-haru'},
-    {name:'佐藤 愛桜', ruby:'さとう ねお', vid:'PF3s-JpW8gk', img:'images/member_photo/sato.png', id:'satou-neo'},
-    {name:'中川 智尋', ruby:'なかがわ ちひろ', vid:'s7KjD_2BaIg', img:'images/member_photo/nakagawa.png', id:'nakagawa-tihiro'},
-    {name:'松本 和子',ruby:'まつもと わこ', vid:'5MHf9RVjg9c', img:'images/member_photo/matumoto.png', id:'matumoto-wako'},
-    {name:'目黒 陽色', ruby:'めぐろ ひいろ', vid:'zRPdTQ3MMKY', img:'images/member_photo/meguro.png', id:'meguro-hiiro'},
-    {name:'山川 宇衣', ruby:'やまかわ うい', vid:'tnBbAvPfJv8', img:'images/member_photo/yamakawa.png', id:'yamakawa-ui'},
-    {name:'山田 桃実', ruby:'やまだ ももみ', vid:'tnBbAvPfJv8', img:'images/member_photo/yamada.png', id:'yamada-momomi'},
+    {name:'浅井 恋乃未', ruby:'あさい このみ',       vid:'mD7r8ORdHPo', img:'images/member_photo/asai.png',     id:'asai-konomi',     page:''},
+    {name:'稲熊 ひな',   ruby:'いなぐま ひな',       vid:'RaJqFkI0bWw', img:'images/member_photo/inaguma.png',  id:'inaguma-hina',    page:''},
+    {name:'勝又 春',     ruby:'かつまた はる',       vid:'OFPRXTqyGT8', img:'images/member_photo/katumata.png', id:'katumata-haru',   page:''},
+    {name:'佐藤 愛桜',   ruby:'さとう ねお',         vid:'PF3s-JpW8gk', img:'images/member_photo/sato.png',     id:'satou-neo',       page:''},
+    {name:'中川 智尋',   ruby:'なかがわ ちひろ',     vid:'s7KjD_2BaIg', img:'images/member_photo/nakagawa.png', id:'nakagawa-tihiro', page:''},
+    {name:'松本 和子',   ruby:'まつもと わこ',       vid:'5MHf9RVjg9c', img:'images/member_photo/matumoto.png', id:'matumoto-wako',   page:''},
+    {name:'目黒 陽色',   ruby:'めぐろ ひいろ',       vid:'zRPdTQ3MMKY', img:'images/member_photo/meguro.png',   id:'meguro-hiiro',    page:''},
+    {name:'山川 宇衣',   ruby:'やまかわ うい',       vid:'tnBbAvPfJv8', img:'images/member_photo/yamakawa.png', id:'yamakawa-ui',     page:''},
+    {name:'山田 桃実',   ruby:'やまだ ももみ',       vid:'tnBbAvPfJv8', img:'images/member_photo/yamada.png',   id:'yamada-momomi',   page:''},
   ]},
 ];
-const MEMBER_PHOTO_DIR = 'images/member_photo';
 
 function getMemberPhotoSrc(m) {
-  // 明示指定（あなたは img を使ってる）
   if (m.img) return m.img;
-
-  // 予備（もし photo を使うなら）
-  if (m.photo) return m.photo;
-
-  // id.png の自動推測
-  if (m.id) return `${MEMBER_PHOTO_DIR}/${m.id}.png`;
-
-  // fallback
   return `https://img.youtube.com/vi/${m.vid}/mqdefault.jpg`;
 }
 
@@ -901,7 +892,10 @@ document.getElementById('memberContent').innerHTML = memberData.map(g=>`
     </div>
     <div class="member-grid">
       ${g.members.map(m=>`
-        <a href="member_detail.html?id=${m.id}" class="member-card">
+        ${m.page
+          ? `<a href="member_page/${m.page}" class="member-card">`
+          : `<div class="member-card">`
+        }
           <div class="member-photo">
             <img
               src="${getMemberPhotoSrc(m)}"
@@ -914,7 +908,7 @@ document.getElementById('memberContent').innerHTML = memberData.map(g=>`
             <p class="member-name-ja">${m.name}</p>
             <p class="member-name-ruby">${m.ruby}</p>
           </div>
-        </a>
+        ${m.page ? `</a>` : `</div>`}
       `).join('')}
     </div>
   </div>

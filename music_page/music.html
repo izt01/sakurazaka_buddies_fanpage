@@ -50,7 +50,12 @@ footer { text-align:center; padding:28px 20px; border-top:1px solid #1e1e28; fon
 </head>
 <body>
 <nav>
-  <a href="sakurazaka.html" class="nav-back"><svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>Back</a>
+  <a href="../index.html" class="nav-back">
+    <svg viewBox="0 0 24 24">
+      <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+    </svg>
+    Back
+  </a>
   <div class="nav-divider"></div>
   <span class="nav-title">櫻坂46</span>
 </nav>
@@ -67,33 +72,50 @@ footer { text-align:center; padding:28px 20px; border-top:1px solid #1e1e28; fon
 
 <script>
 const mvData=[
-  {single:'14th Single',title:'The growing up train',   type:'表題曲', vid:'mD7r8ORdHPo',url:'https://www.youtube.com/watch?v=mD7r8ORdHPo'},
-  {single:'13th Single',title:'Unhappy birthday構文',   type:'表題曲', vid:'RaJqFkI0bWw',url:'https://www.youtube.com/watch?v=RaJqFkI0bWw'},
-  {single:'12th Single',title:'Make or Break',          type:'表題曲', vid:'hCzCTdqAT9s',url:'https://www.youtube.com/watch?v=hCzCTdqAT9s'},
-  {single:'11th Single',title:'UDAGAWA GENERATION',     type:'表題曲', vid:'tnBbAvPfJv8',url:'https://www.youtube.com/watch?v=tnBbAvPfJv8'},
-  {single:'10th Single',title:'I want tomorrow to come',type:'表題曲', vid:'OFPRXTqyGT8',url:'https://www.youtube.com/watch?v=OFPRXTqyGT8'},
-  {single:'9th Single', title:'自業自得',               type:'表題曲', vid:'PF3s-JpW8gk',url:'https://www.youtube.com/watch?v=OFPRXTqyGT8'},
-  {single:'8th Single', title:'何歳の頃に戻りたいのか？',type:'表題曲', vid:'s7KjD_2BaIg',url:'https://www.youtube.com/watch?v=s7KjD_2BaIg'},
-  {single:'7th Single', title:'僕たちの嘘と真実',       type:'Documentary of 欅坂46', vid:'5MHf9RVjg9c',url:'https://www.youtube.com/watch?v=5MHf9RVjg9c'},
-  {single:'6th Single', title:'Start over!',            type:'表題曲', vid:'zRPdTQ3MMKY',url:'https://www.youtube.com/watch?v=zRPdTQ3MMKY'},
-  {single:'5th Single', title:'桜月',                   type:'表題曲', vid:'s7KjD_2BaIg',url:'https://www.youtube.com/watch?v=s7KjD_2BaIg'},
-  {single:'4th Single', title:'五月雨よ',               type:'表題曲', vid:'PF3s-JpW8gk',url:'https://www.youtube.com/watch?v=PF3s-JpW8gk'},
-  {single:'1st Single', title:"Nobody's fault",         type:'表題曲', vid:'5MHf9RVjg9c',url:'https://www.youtube.com/watch?v=5MHf9RVjg9c'},
+  {single:'14th.Single',title:'The growing up train', type:'表題曲', img:'../images/mv_photo/The_growing_up_train.jpg', url:'https://www.youtube.com/watch?v=Rk54JNn7Qw4'},
+  {single:'13th.Single',title:'Unhappy birthday構文',type:'表題曲', img:'../images/mv_photo/Unhappy_birthday.jpg', url:'https://www.youtube.com/watch?v=hBfDlIN0WtI'},
+  {single:'12th.Single',title:'Make or Break',type:'表題曲', img:'../images/mv_photo/make_or_break.jpg', url:'https://www.youtube.com/watch?v=nTxTTZ0QLrI'},
+  {single:'11th.Single',title:'UDAGAWA GENERATION',type:'表題曲', img:'../images/mv_photo/UDAGAWA.jpg', url:'https://www.youtube.com/watch?v=qP52sh7PzYA'},
+  {single:'10th.Single',title:'I want tomorrow to come',type:'表題曲', img:'../images/mv_photo/I_want.jpg', url:'https://www.youtube.com/watch?v=07JLD3d1-W0'},
+  {single:'9th.Single', title:'自業自得',type:'表題曲', img:'../images/mv_photo/zigouzitoku.jpg', url:'https://www.youtube.com/watch?v=Rs-Y9MtHsoo'},
+  {single:'8th.Single', title:'何歳の頃に戻りたいのか',type:'表題曲', img:'../images/mv_photo/ikumodo.jpg', url:'https://www.youtube.com/watch?v=7xx66mR_HeE'},
+  {single:'7th.Single', title:'承認欲求',type:'表題曲', img:'../images/mv_photo/syonin.jpg', url:'https://www.youtube.com/watch?v=x_BjvhMW9TE'},
+  {single:'6th.Single', title:'Start Over!',type:'表題曲', img:'../images/mv_photo/startover.jpg', url:'https://www.youtube.com/watch?v=YJRFD1AdaUE'},
+  {single:'5th.Single', title:'桜月',type:'表題曲', img:'../images/mv_photo/sakuraduki.jpg', url:'https://www.youtube.com/watch?v=zKLgrxHDgls'},
+  {single:'4th.Single', title:'五月雨よ',type:'表題曲', img:'../images/mv_photo/samidare.jpg', url:'https://www.youtube.com/watch?v=3boaeE3dwMs'},
+  {single:'3rd.Single', title:'流れ弾',type:'表題曲', img:'../images/mv_photo/nagaredama.jpg', url:'https://www.youtube.com/watch?v=drCopBcrxRM'},
+  {single:'2nd.Single', title:'BAN',type:'表題曲', img:'../images/mv_photo/ban.jpg', url:'https://www.youtube.com/watch?v=fPZ37t3nvco'},
+  {single:'1st.Single', title:"Nobody's fault",type:'表題曲', img:'../images/mv_photo/nobafo.jpg', url:'https://www.youtube.com/watch?v=fagRTasDcKo'},
 ];
 
-document.getElementById('mvGrid').innerHTML=mvData.map(m=>`
-  <a href="${m.url}" target="_blank" class="mv-card">
-    <div class="mv-thumb">
-      <img src="https://img.youtube.com/vi/${m.vid}/mqdefault.jpg" alt="${m.title}" draggable="false">
-      <div class="mv-play-overlay"><div class="mv-play-btn"></div></div>
-      <span class="mv-badge">${m.single}</span>
-    </div>
-    <div class="mv-info">
-      <p class="mv-single">${m.single}</p>
-      <p class="mv-title">${m.title}</p>
-      <p class="mv-type">${m.type}</p>
-    </div>
-  </a>`).join('');
+document.getElementById('mvGrid').innerHTML =
+  mvData.map(m => {
+
+    const thumbSrc =
+      m.img ?? 'images/mv_photo/default.jpg';
+
+    return `
+      <a href="${m.url}" target="_blank" class="mv-card">
+        <div class="mv-thumb">
+          <img
+            src="${thumbSrc}"
+            alt="${m.title}"
+            draggable="false"
+            onerror="this.onerror=null; this.src='images/mv_photo/default.jpg';"
+          >
+          <div class="mv-play-overlay">
+            <div class="mv-play-btn"></div>
+          </div>
+          <span class="mv-badge">${m.single}</span>
+        </div>
+        <div class="mv-info">
+          <p class="mv-single">${m.single}</p>
+          <p class="mv-title">${m.title}</p>
+          <p class="mv-type">${m.type}</p>
+        </div>
+      </a>
+    `;
+  }).join('');
 </script>
 </body>
 </html>
