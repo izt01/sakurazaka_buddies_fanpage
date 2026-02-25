@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YouTube | 櫻坂46</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;700&family=Cormorant+Garamond:wght@300;400;600&family=Noto+Sans+JP:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+:root { --sakura:#f2a7b8; --deep:#1a0a0f; --cream:#fdf8f5; --gold:#c9a96e; --accent:#c0004e; --border:#e8e8e8; }
+html { scroll-behavior:smooth; }
+body { font-family:'Noto Sans JP',sans-serif; background:#fafafa; color:#222; min-height:100vh; }
+
+nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:16px 24px; display:flex; align-items:center; gap:16px; background:rgba(26,10,15,0.92); backdrop-filter:blur(8px); }
+.nav-back { display:flex; align-items:center; gap:8px; color:rgba(253,248,245,0.7); text-decoration:none; font-size:.82rem; letter-spacing:.1em; text-transform:uppercase; font-family:'Cormorant Garamond',serif; transition:color .2s; }
+.nav-back:hover { color:var(--sakura); }
+.nav-back svg { width:16px; height:16px; fill:currentColor; }
+.nav-divider { width:1px; height:18px; background:rgba(255,255,255,.2); }
+.nav-title { font-family:'Noto Serif JP',serif; font-size:.95rem; letter-spacing:.25em; color:var(--cream); }
+
+.page-header { margin-top:56px; padding:52px 0 40px; text-align:center; background:linear-gradient(160deg,#1a0a0f 0%,#2d0f1e 60%,#1a0a0f 100%); position:relative; overflow:hidden; }
+.page-header::after { content:''; position:absolute; bottom:0; left:0; right:0; height:2px; background:linear-gradient(to right,transparent,var(--gold),transparent); }
+.page-header-title { font-family:'Cormorant Garamond',serif; font-size:clamp(2rem,6vw,3.5rem); font-weight:300; letter-spacing:.5em; text-transform:uppercase; background:linear-gradient(135deg,#fff 0%,var(--sakura) 50%,var(--gold) 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.page-header-sub { font-size:.78rem; color:rgba(253,248,245,.4); letter-spacing:.3em; margin-top:.8rem; text-transform:uppercase; font-family:'Cormorant Garamond',serif; }
+
+.yt-wrap { max-width:1100px; margin:0 auto; padding:40px 24px 80px; }
+
+/* チャンネルブロック */
+.channel-block { margin-bottom:60px; }
+.channel-header { display:flex; align-items:center; gap:12px; margin-bottom:24px; padding-bottom:14px; border-left:3px solid #222; padding-left:14px; }
+.channel-name { font-size:1.05rem; font-weight:700; color:#111; letter-spacing:.03em; }
+.channel-link { display:flex; align-items:center; justify-content:center; width:34px; height:34px; background:#ff0000; border-radius:5px; text-decoration:none; flex-shrink:0; transition:opacity .2s; }
+.channel-link:hover { opacity:.8; }
+.channel-link svg { width:18px; height:18px; fill:#fff; }
+.channel-sub { font-size:.78rem; color:#888; margin-top:2px; }
+
+.video-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:20px 16px; }
+
+.video-card { display:block; text-decoration:none; color:inherit; cursor:pointer; }
+.video-thumb { width:100%; aspect-ratio:16/9; overflow:hidden; background:#e0e0e0; border-radius:6px; position:relative; }
+.video-thumb img { width:100%; height:100%; object-fit:cover; transition:transform .4s; display:block; }
+.video-card:hover .video-thumb img { transform:scale(1.05); }
+.video-overlay { position:absolute; inset:0; background:rgba(0,0,0,.12); display:flex; align-items:center; justify-content:center; transition:background .3s; }
+.video-card:hover .video-overlay { background:rgba(0,0,0,.35); }
+.video-play { width:36px; height:36px; border-radius:50%; border:2px solid rgba(255,255,255,.85); display:flex; align-items:center; justify-content:center; }
+.video-play::after { content:''; border-style:solid; border-width:6px 0 6px 12px; border-color:transparent transparent transparent rgba(255,255,255,.9); margin-left:3px; }
+.video-info { margin-top:8px; }
+.video-title { font-size:.8rem; color:#222; line-height:1.55; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; transition:color .2s; }
+.video-card:hover .video-title { color:var(--accent); }
+.video-date { font-size:.7rem; color:#aaa; margin-top:4px; }
+
+footer { text-align:center; padding:28px 20px; border-top:1px solid #eee; font-size:.72rem; color:#aaa; letter-spacing:.2em; font-family:'Cormorant Garamond',serif; background:#fff; }
+
+@media (max-width:860px) { .video-grid { grid-template-columns:repeat(3,1fr); } }
+@media (max-width:600px) { .video-grid { grid-template-columns:repeat(2,1fr); gap:14px 10px; } }
+</style>
+</head>
+<body>
+<nav>
+  <a href="sakurazaka.html" class="nav-back"><svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>Back</a>
+  <div class="nav-divider"></div>
+  <span class="nav-title">櫻坂46</span>
+</nav>
+
+<div class="page-header">
+  <h1 class="page-header-title">YouTube</h1>
+  <p class="page-header-sub">Official Channels</p>
+</div>
+
+<div class="yt-wrap" id="ytWrap"></div>
+<footer>© 2026 SAKURAZAKA46 ALL RIGHTS RESERVED</footer>
+
+<script>
+const channels=[
+  {
+    name:'櫻坂46 OFFICIAL YouTube CHANNEL',
+    url:'https://www.youtube.com/@sakurazaka46',
+    sub:'公式チャンネル / Music Video・ドキュメンタリー',
+    videos:[
+      {title:"櫻坂46『The growing up train』MUSIC VIDEO",                  date:'2026.02.01', vid:'mD7r8ORdHPo',url:'https://www.youtube.com/watch?v=mD7r8ORdHPo'},
+      {title:"櫻坂46『そこ曲がったら、櫻坂？』Blu-rayシリーズ第三弾 予告編",  date:'2025.12.10', vid:'RaJqFkI0bWw',url:'https://www.youtube.com/watch?v=RaJqFkI0bWw'},
+      {title:"櫻坂46『Unhappy birthday構文』MUSIC VIDEO",                  date:'2025.11.27', vid:'hCzCTdqAT9s',url:'https://www.youtube.com/watch?v=hCzCTdqAT9s'},
+      {title:"櫻坂46『Make or Break』MUSIC VIDEO",                         date:'2025.08.14', vid:'tnBbAvPfJv8',url:'https://www.youtube.com/watch?v=tnBbAvPfJv8'},
+      {title:"櫻坂46『UDAGAWA GENERATION』MUSIC VIDEO",                    date:'2025.05.21', vid:'OFPRXTqyGT8',url:'https://www.youtube.com/watch?v=OFPRXTqyGT8'},
+      {title:"櫻坂46『自業自得』MUSIC VIDEO",                               date:'2024.11.27', vid:'PF3s-JpW8gk',url:'https://www.youtube.com/watch?v=PF3s-JpW8gk'},
+      {title:"櫻坂46『桜月』MUSIC VIDEO",                                   date:'2024.03.27', vid:'s7KjD_2BaIg',url:'https://www.youtube.com/watch?v=s7KjD_2BaIg'},
+      {title:"櫻坂46『Start over!』MUSIC VIDEO",                           date:'2023.09.13', vid:'zRPdTQ3MMKY',url:'https://www.youtube.com/watch?v=zRPdTQ3MMKY'},
+    ]
+  },
+  {
+    name:'櫻坂チャンネル',
+    url:'https://www.youtube.com/@sakurazaka46sub',
+    sub:'バラエティ・密着・メンバー企画',
+    videos:[
+      {title:'【レゴ】的野美青が実家の大量のレゴで生写真ガチャ機製作！【構造解説】', date:'2026.02.20', vid:'tnBbAvPfJv8',url:'https://www.youtube.com/watch?v=tnBbAvPfJv8'},
+      {title:'【勝又持ち込み企画】イラストから料理を連想！チーム対抗クッキング対決！',date:'2026.02.15', vid:'OFPRXTqyGT8',url:'https://www.youtube.com/watch?v=OFPRXTqyGT8'},
+      {title:'【メンバーの素顔】密着24時間！オフショット大公開',                   date:'2026.02.05', vid:'5MHf9RVjg9c',url:'https://www.youtube.com/watch?v=5MHf9RVjg9c'},
+      {title:'【ゲーム対決】メンバー対抗！最強ゲーマーは誰だ！？',                 date:'2026.01.28', vid:'mD7r8ORdHPo',url:'https://www.youtube.com/watch?v=mD7r8ORdHPo'},
+      {title:'【料理】メンバーが本気で作る！絶品鍋パーティー',                     date:'2026.01.20', vid:'RaJqFkI0bWw',url:'https://www.youtube.com/watch?v=RaJqFkI0bWw'},
+      {title:'【新企画】推しメンを当てろ！ブラインドチャレンジ',                   date:'2026.01.10', vid:'hCzCTdqAT9s',url:'https://www.youtube.com/watch?v=hCzCTdqAT9s'},
+    ]
+  },
+];
+
+document.getElementById('ytWrap').innerHTML=channels.map(ch=>`
+  <div class="channel-block">
+    <div class="channel-header">
+      <div>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <span class="channel-name">${ch.name}</span>
+          <a href="${ch.url}" target="_blank" class="channel-link" title="チャンネルへ">
+            <svg viewBox="0 0 24 24"><path d="M21.8 8s-.2-1.4-.8-2c-.8-.8-1.6-.8-2-.9C17 5 12 5 12 5s-5 0-7 .1c-.4.1-1.2.1-2 .9-.6.6-.8 2-.8 2S2 9.6 2 11.2v1.5c0 1.6.2 3.2.2 3.2s.2 1.4.8 2c.8.8 1.8.7 2.3.8C7 18.8 12 19 12 19s5 0 7-.1c.4-.1 1.2-.1 2-.9.6-.6.8-2 .8-2s.2-1.6.2-3.2v-1.5C22 9.6 21.8 8 21.8 8zM9.7 14.5V9.5l5.4 2.5-5.4 2.5z"/></svg>
+          </a>
+        </div>
+        <p class="channel-sub">${ch.sub}</p>
+      </div>
+    </div>
+    <div class="video-grid">
+      ${ch.videos.map(v=>`
+        <a href="${v.url}" target="_blank" class="video-card">
+          <div class="video-thumb">
+            <img src="https://img.youtube.com/vi/${v.vid}/mqdefault.jpg" alt="${v.title}">
+            <div class="video-overlay"><div class="video-play"></div></div>
+          </div>
+          <div class="video-info">
+            <p class="video-title">${v.title}</p>
+            <p class="video-date">${v.date}</p>
+          </div>
+        </a>`).join('')}
+    </div>
+  </div>`).join('');
+</script>
+</body>
+</html>

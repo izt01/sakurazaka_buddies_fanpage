@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>News | 櫻坂46</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;700&family=Cormorant+Garamond:wght@300;400;600&family=Noto+Sans+JP:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+:root { --sakura:#f2a7b8; --deep:#1a0a0f; --cream:#fdf8f5; --gold:#c9a96e; --accent:#c0004e; --border:#e8e8e8; }
+html { scroll-behavior:smooth; }
+body { font-family:'Noto Sans JP',sans-serif; background:#fafafa; color:#222; min-height:100vh; }
+
+nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:16px 24px; display:flex; align-items:center; gap:16px; background:rgba(26,10,15,0.92); backdrop-filter:blur(8px); }
+.nav-back { display:flex; align-items:center; gap:8px; color:rgba(253,248,245,0.7); text-decoration:none; font-size:.82rem; letter-spacing:.1em; text-transform:uppercase; font-family:'Cormorant Garamond',serif; transition:color .2s; }
+.nav-back:hover { color:var(--sakura); }
+.nav-back svg { width:16px; height:16px; fill:currentColor; }
+.nav-divider { width:1px; height:18px; background:rgba(255,255,255,.2); }
+.nav-title { font-family:'Noto Serif JP',serif; font-size:.95rem; letter-spacing:.25em; color:var(--cream); }
+
+.page-header { margin-top:56px; padding:52px 0 40px; text-align:center; background:linear-gradient(160deg,#1a0a0f 0%,#2d0f1e 60%,#1a0a0f 100%); position:relative; overflow:hidden; }
+.page-header::after { content:''; position:absolute; bottom:0; left:0; right:0; height:2px; background:linear-gradient(to right,transparent,var(--gold),transparent); }
+.page-header-title { font-family:'Cormorant Garamond',serif; font-size:clamp(2rem,6vw,3.5rem); font-weight:300; letter-spacing:.5em; text-transform:uppercase; background:linear-gradient(135deg,#fff 0%,var(--sakura) 50%,var(--gold) 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.page-header-sub { font-size:.78rem; color:rgba(253,248,245,.4); letter-spacing:.3em; margin-top:.8rem; text-transform:uppercase; font-family:'Cormorant Garamond',serif; }
+
+.filter-bar { display:flex; gap:8px; flex-wrap:wrap; max-width:900px; margin:36px auto 0; padding:0 24px; }
+.filter-btn { padding:6px 18px; border-radius:20px; border:1px solid var(--border); background:#fff; font-size:.75rem; letter-spacing:.08em; color:#666; cursor:pointer; transition:all .2s; font-family:'Noto Sans JP',sans-serif; }
+.filter-btn:hover { border-color:var(--sakura); color:var(--accent); }
+.filter-btn.active { background:var(--accent); border-color:var(--accent); color:#fff; }
+
+.news-wrap { max-width:900px; margin:0 auto; padding:32px 24px 80px; }
+
+.news-item { display:grid; grid-template-columns:110px auto 1fr; align-items:start; gap:16px; padding:22px 0; border-bottom:1px solid var(--border); transition:all .25s; cursor:pointer; text-decoration:none; color:inherit; border-radius:4px; }
+.news-item:first-child { border-top:1px solid var(--border); }
+.news-item:hover { background:rgba(242,167,184,.05); padding-left:10px; }
+.news-item-date { font-size:.8rem; color:#999; padding-top:3px; white-space:nowrap; font-family:'Cormorant Garamond',serif; letter-spacing:.05em; }
+.news-item-tag { font-size:.65rem; padding:3px 10px; border-radius:20px; border:1px solid var(--sakura); color:var(--accent); white-space:nowrap; margin-top:1px; flex-shrink:0; }
+.news-item-title { font-size:.95rem; color:#222; line-height:1.65; transition:color .2s; }
+.news-item:hover .news-item-title { color:var(--accent); }
+.news-item-excerpt { font-size:.78rem; color:#888; margin-top:6px; line-height:1.7; }
+.tag-live { border-color:#f5b8c8; color:#c0004e; }
+.tag-single { border-color:#c8b8f5; color:#7a4a9e; }
+.tag-tv { border-color:#b8c8f5; color:#2e4ec5; }
+.tag-event { border-color:#f0d890; color:#a07020; }
+.tag-info { border-color:#b8e0d8; color:#2e8060; }
+
+footer { text-align:center; padding:28px 20px; border-top:1px solid #eee; font-size:.72rem; color:#aaa; letter-spacing:.2em; font-family:'Cormorant Garamond',serif; background:#fff; }
+
+@media (max-width:560px) {
+  .news-item { grid-template-columns:1fr; gap:8px; }
+  .news-item-date { font-size:.75rem; }
+}
+</style>
+</head>
+<body>
+<nav>
+  <a href="sakurazaka.html" class="nav-back"><svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>Back</a>
+  <div class="nav-divider"></div>
+  <span class="nav-title">櫻坂46</span>
+</nav>
+
+<div class="page-header">
+  <h1 class="page-header-title">News</h1>
+  <p class="page-header-sub">Latest Information</p>
+</div>
+
+<div class="filter-bar" id="filterBar">
+  <button class="filter-btn active" data-filter="all">すべて</button>
+  <button class="filter-btn" data-filter="live">LIVE</button>
+  <button class="filter-btn" data-filter="single">シングル</button>
+  <button class="filter-btn" data-filter="tv">TV</button>
+  <button class="filter-btn" data-filter="event">イベント</button>
+  <button class="filter-btn" data-filter="info">お知らせ</button>
+</div>
+
+<div class="news-wrap" id="newsWrap"></div>
+<footer>© 2026 SAKURAZAKA46 ALL RIGHTS RESERVED</footer>
+
+<script>
+const newsData=[
+  {date:'2026.02.23',cat:'live',  title:'全国アリーナツアー2026 開催決定！チケット先行受付スタート',excerpt:'2026年春〜夏にかけて全国5都市を巡るアリーナツアーの開催が決定。東京・大阪・名古屋・福岡・札幌での公演が予定されています。',url:'https://example.com/news/1'},
+  {date:'2026.02.20',cat:'single',title:'14thシングル「The growing up train」ストリーミング配信中',excerpt:'3月1日にCDリリースを控えた14thシングルがデジタル先行配信スタート。各音楽ストリーミングサービスにて聴取可能です。',url:'https://example.com/news/2'},
+  {date:'2026.02.15',cat:'tv',    title:'「ミュージックステーション」3月7日出演決定',excerpt:'テレビ朝日系「ミュージックステーション」への出演が決定。14thシングル収録曲を披露予定です。',url:'https://example.com/news/3'},
+  {date:'2026.02.10',cat:'event', title:'握手会・特典会スケジュール更新！申込受付開始',excerpt:'14thシングル発売に伴う全国握手会・オンライン特典会のスケジュールを更新しました。申込期間をご確認ください。',url:'https://example.com/news/4'},
+  {date:'2026.02.01',cat:'info',  title:'オフィシャルファンクラブ「S46」会員向けコンテンツ更新',excerpt:'ファンクラブ限定コンテンツとして、メンバーメッセージ動画・壁紙・オフショット写真を追加しました。',url:'https://example.com/news/5'},
+  {date:'2026.01.28',cat:'tv',    title:'「CDTVライブ！ライブ！」出演決定（2月2日放送）',excerpt:'TBS系「CDTVライブ！ライブ！」に出演決定。昨年リリースの楽曲も含めたパフォーマンスを披露します。',url:'https://example.com/news/6'},
+  {date:'2026.01.20',cat:'single',title:'14thシングル「The growing up train」3月1日発売決定！',excerpt:'14thシングルの発売日・タイトルを発表。センターは山﨑天。初回仕様限定盤・通常盤の3形態での発売となります。',url:'https://example.com/news/7'},
+  {date:'2026.01.15',cat:'live',  title:'「春の単独ライブ2026」横浜アリーナ公演決定',excerpt:'1月15日、横浜アリーナでの春の単独ライブ開催が発表。3月21日・22日の2日間公演となります。',url:'https://example.com/news/8'},
+  {date:'2026.01.10',cat:'event', title:'バースデーイベント2026 開催決定',excerpt:'毎年恒例のバースデーイベントの開催が決定しました。詳細は後日発表予定です。',url:'https://example.com/news/9'},
+  {date:'2025.12.25',cat:'info',  title:'年末年始 活動スケジュールのお知らせ',excerpt:'12月31日の「紅白歌合戦」出場をはじめ、年末年始の活動スケジュールをまとめて公開しました。',url:'https://example.com/news/10'},
+  {date:'2025.12.18',cat:'tv',    title:'「ベストアーティスト2025」出演',excerpt:'日本テレビ系「ベストアーティスト2025」に出演。13thシングル「Unhappy birthday構文」を披露しました。',url:'https://example.com/news/11'},
+  {date:'2025.12.01',cat:'single',title:'13thシングル「Unhappy birthday構文」リリース',excerpt:'13thシングルが本日リリース。オリコン週間シングルランキング1位を獲得しました。',url:'https://example.com/news/12'},
+];
+const TAG_LABEL={live:'LIVE',single:'シングル',tv:'TV',event:'イベント',info:'お知らせ'};
+const TAG_CLS={live:'tag-live',single:'tag-single',tv:'tag-tv',event:'tag-event',info:'tag-info'};
+
+function render(filter){
+  const list=filter==='all'?newsData:newsData.filter(n=>n.cat===filter);
+  document.getElementById('newsWrap').innerHTML=list.map(n=>`
+    <a href="${n.url}" target="_blank" class="news-item">
+      <span class="news-item-date">${n.date}</span>
+      <span class="news-item-tag ${TAG_CLS[n.cat]||''}">${TAG_LABEL[n.cat]||n.cat}</span>
+      <div><p class="news-item-title">${n.title}</p><p class="news-item-excerpt">${n.excerpt}</p></div>
+    </a>`).join('');
+}
+document.getElementById('filterBar').addEventListener('click',e=>{
+  const btn=e.target.closest('.filter-btn'); if(!btn) return;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active'); render(btn.dataset.filter);
+});
+render('all');
+</script>
+</body>
+</html>

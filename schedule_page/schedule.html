@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Schedule | 櫻坂46</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;700&family=Cormorant+Garamond:wght@300;400;600&family=Noto+Sans+JP:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --sakura: #f2a7b8;
+  --deep: #1a0a0f;
+  --cream: #fdf8f5;
+  --gold: #c9a96e;
+  --border: #e8e8e8;
+  --accent: #c0004e;
+}
+
+html { scroll-behavior: smooth; }
+body { font-family: 'Noto Sans JP', sans-serif; background: #fafafa; color: #222; min-height: 100vh; }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 16px 24px;
+  display: flex; align-items: center; gap: 16px;
+  background: rgba(26,10,15,0.92); backdrop-filter: blur(8px);
+}
+.nav-back {
+  display: flex; align-items: center; gap: 8px;
+  color: rgba(253,248,245,0.7); text-decoration: none;
+  font-size: .82rem; letter-spacing: .1em; text-transform: uppercase;
+  font-family: 'Cormorant Garamond', serif;
+  transition: color .2s;
+}
+.nav-back:hover { color: var(--sakura); }
+.nav-back svg { width: 16px; height: 16px; fill: currentColor; }
+.nav-divider { width: 1px; height: 18px; background: rgba(255,255,255,.2); }
+.nav-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: .95rem; letter-spacing: .25em; color: var(--cream);
+}
+
+/* ── HEADER ── */
+.page-header {
+  margin-top: 56px;
+  padding: 52px 0 40px;
+  text-align: center;
+  background: linear-gradient(160deg, #1a0a0f 0%, #2d0f1e 60%, #1a0a0f 100%);
+  position: relative; overflow: hidden;
+}
+.page-header::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
+}
+.page-header-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 6vw, 3.5rem); font-weight: 300;
+  letter-spacing: .5em; text-transform: uppercase;
+  background: linear-gradient(135deg, #fff 0%, var(--sakura) 50%, var(--gold) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.page-header-sub {
+  font-size: .78rem; color: rgba(253,248,245,.4);
+  letter-spacing: .3em; margin-top: .8rem; text-transform: uppercase;
+  font-family: 'Cormorant Garamond', serif;
+}
+
+/* ── FILTER TABS ── */
+.filter-bar {
+  display: flex; gap: 8px; flex-wrap: wrap;
+  max-width: 900px; margin: 36px auto 0; padding: 0 24px;
+}
+.filter-btn {
+  padding: 6px 18px; border-radius: 20px; border: 1px solid var(--border);
+  background: #fff; font-size: .75rem; letter-spacing: .08em;
+  color: #666; cursor: pointer; transition: all .2s;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+.filter-btn:hover { border-color: var(--sakura); color: var(--accent); }
+.filter-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+/* ── CALENDAR MONTH ── */
+.schedule-wrap { max-width: 900px; margin: 0 auto; padding: 32px 24px 80px; }
+
+.month-block { margin-bottom: 44px; }
+.month-heading {
+  display: flex; align-items: center; gap: 16px;
+  margin-bottom: 16px;
+}
+.month-heading-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem; font-weight: 300; letter-spacing: .2em; color: #222;
+  white-space: nowrap;
+}
+.month-heading-line {
+  flex: 1; height: 1px;
+  background: linear-gradient(to right, var(--border), transparent);
+}
+
+/* ── SCHEDULE ITEMS ── */
+.schedule-list { display: flex; flex-direction: column; gap: 0; }
+
+.schedule-item {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  border-bottom: 1px solid var(--border);
+  padding: 14px 0;
+  transition: background .2s;
+  border-radius: 4px;
+}
+.schedule-item:hover { background: rgba(242,167,184,.04); }
+.schedule-item:first-child { border-top: 1px solid var(--border); }
+
+.schedule-date-col { padding: 2px 12px 0 0; }
+.schedule-day-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem; font-weight: 300; line-height: 1; color: #222;
+}
+.schedule-day-week {
+  font-size: .65rem; color: #aaa; letter-spacing: .05em; margin-top: 2px;
+}
+.schedule-day-week.sat { color: #2e7ec5; }
+.schedule-day-week.sun { color: var(--accent); }
+
+.schedule-body { padding-left: 16px; border-left: 2px solid var(--border); }
+.schedule-item:hover .schedule-body { border-left-color: var(--sakura); }
+
+.event-row {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 5px 0;
+}
+.event-tag {
+  flex-shrink: 0; font-size: .62rem; padding: 2px 8px;
+  border-radius: 20px; letter-spacing: .05em; margin-top: 2px;
+  font-weight: 600; white-space: nowrap;
+}
+.tag-live    { background: #fff0f3; color: #c0004e; border: 1px solid #f5b8c8; }
+.tag-tv      { background: #f0f4ff; color: #2e4ec5; border: 1px solid #b8c8f5; }
+.tag-release { background: #f5f0ff; color: #7a4a9e; border: 1px solid #c8b8f5; }
+.tag-event   { background: #fff8e0; color: #a07020; border: 1px solid #f0d890; }
+.tag-radio   { background: #e8f8f0; color: #2e8060; border: 1px solid #90e0b8; }
+.tag-other   { background: #f5f5f5; color: #666; border: 1px solid #ddd; }
+
+.event-text { font-size: .86rem; color: #333; line-height: 1.55; }
+.event-text a { color: var(--accent); text-decoration: none; }
+.event-text a:hover { text-decoration: underline; }
+.event-venue { font-size: .74rem; color: #888; margin-top: 2px; }
+
+/* empty state */
+.no-schedule {
+  text-align: center; padding: 60px 20px;
+  color: #bbb; font-size: .88rem; letter-spacing: .1em;
+}
+.no-schedule svg { width: 48px; height: 48px; fill: #ddd; display: block; margin: 0 auto 16px; }
+
+/* ── FOOTER ── */
+footer {
+  text-align: center; padding: 28px 20px;
+  border-top: 1px solid #eee; font-size: .72rem; color: #aaa;
+  letter-spacing: .2em; font-family: 'Cormorant Garamond', serif; background: #fff;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 480px) {
+  .schedule-item { grid-template-columns: 56px 1fr; }
+  .schedule-day-num { font-size: 1.2rem; }
+  .event-text { font-size: .82rem; }
+  .filter-bar { gap: 6px; }
+  .filter-btn { padding: 5px 12px; font-size: .7rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="sakurazaka.html" class="nav-back">
+    <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+    Back
+  </a>
+  <div class="nav-divider"></div>
+  <span class="nav-title">櫻坂46</span>
+</nav>
+
+<!-- HEADER -->
+<div class="page-header">
+  <h1 class="page-header-title">Schedule</h1>
+  <p class="page-header-sub">2026 &nbsp;•&nbsp; Activity Calendar</p>
+</div>
+
+<!-- FILTER -->
+<div class="filter-bar" id="filterBar">
+  <button class="filter-btn active" data-filter="all">すべて</button>
+  <button class="filter-btn" data-filter="live">LIVE</button>
+  <button class="filter-btn" data-filter="tv">TV</button>
+  <button class="filter-btn" data-filter="release">リリース</button>
+  <button class="filter-btn" data-filter="event">イベント</button>
+  <button class="filter-btn" data-filter="radio">ラジオ</button>
+</div>
+
+<!-- SCHEDULE -->
+<div class="schedule-wrap" id="scheduleWrap"></div>
+
+<footer>© 2026 SAKURAZAKA46 ALL RIGHTS RESERVED</footer>
+
+<script>
+/* ════════════════════════════════
+   スケジュールデータ
+   category: live / tv / release / event / radio / other
+════════════════════════════════ */
+const scheduleData = [
+  /* ── 2026年2月 ── */
+  {
+    year:2026, month:2, day:23,
+    events:[
+      { cat:'tv',      text:'「Mステ スーパーライブ」出演', venue:'テレビ朝日 18:00〜' },
+    ]
+  },
+  {
+    year:2026, month:2, day:25,
+    events:[
+      { cat:'radio',   text:'「オールナイトニッポン 櫻坂46」', venue:'ニッポン放送 25:00〜' },
+    ]
+  },
+  {
+    year:2026, month:2, day:28,
+    events:[
+      { cat:'event',   text:'握手会・特典会', venue:'幕張メッセ 国際展示場' },
+    ]
+  },
+
+  /* ── 2026年3月 ── */
+  {
+    year:2026, month:3, day:1,
+    events:[
+      { cat:'release', text:'14thシングル「The growing up train」CD発売', venue:'' },
+    ]
+  },
+  {
+    year:2026, month:3, day:7,
+    events:[
+      { cat:'tv',      text:'「ミュージックステーション」出演', venue:'テレビ朝日 20:00〜' },
+    ]
+  },
+  {
+    year:2026, month:3, day:14,
+    events:[
+      { cat:'live',    text:'全国アリーナツアー2026 東京公演 Day1', venue:'東京ドーム 17:00開場 / 18:00開演' },
+    ]
+  },
+  {
+    year:2026, month:3, day:15,
+    events:[
+      { cat:'live',    text:'全国アリーナツアー2026 東京公演 Day2', venue:'東京ドーム 16:00開場 / 17:00開演' },
+    ]
+  },
+  {
+    year:2026, month:3, day:20,
+    events:[
+      { cat:'event',   text:'サイン会', venue:'タワーレコード渋谷店' },
+      { cat:'tv',      text:'「MUSIC BLOOD」出演', venue:'日本テレビ 23:30〜' },
+    ]
+  },
+  {
+    year:2026, month:3, day:25,
+    events:[
+      { cat:'radio',   text:'「オールナイトニッポン 櫻坂46」', venue:'ニッポン放送 25:00〜' },
+    ]
+  },
+  {
+    year:2026, month:3, day:28,
+    events:[
+      { cat:'live',    text:'全国アリーナツアー2026 大阪公演 Day1', venue:'京セラドーム大阪 17:00開場 / 18:00開演' },
+    ]
+  },
+  {
+    year:2026, month:3, day:29,
+    events:[
+      { cat:'live',    text:'全国アリーナツアー2026 大阪公演 Day2', venue:'京セラドーム大阪 16:00開場 / 17:00開演' },
+    ]
+  },
+
+  /* ── 2026年4月 ── */
+  {
+    year:2026, month:4, day:4,
+    events:[
+      { cat:'live',    text:'全国アリーナツアー2026 名古屋公演', venue:'バンテリンドームナゴヤ 17:00開場 / 18:00開演' },
+    ]
+  },
+  {
+    year:2026, month:4, day:11,
+    events:[
+      { cat:'live',    text:'全国アリーナツアー2026 福岡公演', venue:'みずほPayPayドーム福岡 17:00開場 / 18:00開演' },
+    ]
+  },
+  {
+    year:2026, month:4, day:18,
+    events:[
+      { cat:'event',   text:'握手会・特典会（春の部）', venue:'パシフィコ横浜' },
+    ]
+  },
+  {
+    year:2026, month:4, day:22,
+    events:[
+      { cat:'tv',      text:'「うたコン」出演', venue:'NHK 20:15〜' },
+    ]
+  },
+  {
+    year:2026, month:4, day:29,
+    events:[
+      { cat:'radio',   text:'「オールナイトニッポン 櫻坂46」', venue:'ニッポン放送 25:00〜' },
+    ]
+  },
+];
+
+/* ── 曜日ユーティリティ ── */
+const WEEKDAYS = ['日','月','火','水','木','金','土'];
+const TAG_MAP = {
+  live:    { label:'LIVE',    cls:'tag-live'    },
+  tv:      { label:'TV',      cls:'tag-tv'      },
+  release: { label:'リリース', cls:'tag-release' },
+  event:   { label:'イベント', cls:'tag-event'   },
+  radio:   { label:'ラジオ',   cls:'tag-radio'   },
+  other:   { label:'その他',   cls:'tag-other'   },
+};
+
+function getWeekClass(d) {
+  const w = new Date(d.year, d.month-1, d.day).getDay();
+  if(w===0) return 'sun'; if(w===6) return 'sat'; return '';
+}
+function getWeekLabel(d) {
+  return WEEKDAYS[new Date(d.year, d.month-1, d.day).getDay()] + '曜日';
+}
+
+/* ── レンダリング ── */
+let currentFilter = 'all';
+
+function render(filter) {
+  currentFilter = filter;
+  const wrap = document.getElementById('scheduleWrap');
+
+  // フィルタ適用
+  const filtered = scheduleData.map(day => ({
+    ...day,
+    events: day.events.filter(e => filter === 'all' || e.cat === filter)
+  })).filter(day => day.events.length > 0);
+
+  if (filtered.length === 0) {
+    wrap.innerHTML = `
+      <div class="no-schedule">
+        <svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 18H5V8h14v13z"/></svg>
+        該当するスケジュールはありません
+      </div>`;
+    return;
+  }
+
+  // 月ごとにグループ化
+  const byMonth = {};
+  filtered.forEach(d => {
+    const key = `${d.year}-${String(d.month).padStart(2,'0')}`;
+    if (!byMonth[key]) byMonth[key] = { year:d.year, month:d.month, days:[] };
+    byMonth[key].days.push(d);
+  });
+
+  wrap.innerHTML = Object.values(byMonth).map(m => `
+    <div class="month-block">
+      <div class="month-heading">
+        <span class="month-heading-text">${m.year}.${String(m.month).padStart(2,'0')}</span>
+        <div class="month-heading-line"></div>
+      </div>
+      <div class="schedule-list">
+        ${m.days.map(d => {
+          const wc  = getWeekClass(d);
+          const wl  = getWeekLabel(d);
+          return `
+            <div class="schedule-item">
+              <div class="schedule-date-col">
+                <div class="schedule-day-num">${String(d.day).padStart(2,'0')}</div>
+                <div class="schedule-day-week ${wc}">${wl}</div>
+              </div>
+              <div class="schedule-body">
+                ${d.events.map(e => {
+                  const t = TAG_MAP[e.cat] || TAG_MAP.other;
+                  return `
+                    <div class="event-row">
+                      <span class="event-tag ${t.cls}">${t.label}</span>
+                      <div>
+                        <div class="event-text">${e.text}</div>
+                        ${e.venue ? `<div class="event-venue">${e.venue}</div>` : ''}
+                      </div>
+                    </div>`;
+                }).join('')}
+              </div>
+            </div>`;
+        }).join('')}
+      </div>
+    </div>
+  `).join('');
+}
+
+/* ── フィルターボタン ── */
+document.getElementById('filterBar').addEventListener('click', e => {
+  const btn = e.target.closest('.filter-btn');
+  if (!btn) return;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  render(btn.dataset.filter);
+});
+
+// 初期描画
+render('all');
+</script>
+</body>
+</html>
