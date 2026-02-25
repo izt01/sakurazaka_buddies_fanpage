@@ -59,7 +59,12 @@ footer { text-align:center; padding:28px 20px; border-top:1px solid #eee; font-s
 </head>
 <body>
 <nav>
-  <a href="sakurazaka.html" class="nav-back"><svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>Back</a>
+  <a href="../index.html" class="nav-back">
+    <svg viewBox="0 0 24 24">
+      <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+    </svg>
+    Back
+  </a>
   <div class="nav-divider"></div>
   <span class="nav-title">櫻坂46</span>
 </nav>
@@ -82,42 +87,46 @@ footer { text-align:center; padding:28px 20px; border-top:1px solid #eee; font-s
 <footer>© 2026 SAKURAZAKA46 ALL RIGHTS RESERVED</footer>
 
 <script>
+// member_page/member.html → images/member_photo/ への相対パス
+const IMG = '../images/member_photo/';
+
 const members=[
-  // 2期生
-  {id:'endo-hikari',     gen:2, name:'遠藤 光莉', ruby:'えんどう ひかり',    vid:'OFPRXTqyGT8'},
-  {id:'oozono-rei',      gen:2, name:'大園 玲',   ruby:'おおぞの れい',      vid:'PF3s-JpW8gk'},
-  {id:'oonuma-akiho',    gen:2, name:'大沼 晶保', ruby:'おおぬま あきほ',    vid:'s7KjD_2BaIg'},
-  {id:'kosaka-marino',   gen:2, name:'幸阪 茉里乃',ruby:'こうさか まりの',   vid:'5MHf9RVjg9c'},
-  {id:'kobayashi-yui',   gen:2, name:'小林 由依', ruby:'こばやし ゆい',      vid:'zRPdTQ3MMKY'},
-  {id:'tamura-hono',     gen:2, name:'田村 保乃', ruby:'たむら ほの',        vid:'tnBbAvPfJv8'},
-  {id:'fujiyoshi-karin', gen:2, name:'藤吉 夏鈴', ruby:'ふじよし かりん',    vid:'mD7r8ORdHPo'},
-  {id:'masumoto-kira',   gen:2, name:'増本 綺良', ruby:'ますもと きら',      vid:'RaJqFkI0bWw'},
-  {id:'matsuda-rina',    gen:2, name:'松田 里奈', ruby:'まつだ りな',        vid:'hCzCTdqAT9s'},
-  {id:'moriya-rena',     gen:2, name:'守屋 麗奈', ruby:'もりや れな',        vid:'OFPRXTqyGT8'},
-  {id:'yamazaki-ten',    gen:2, name:'山﨑 天',   ruby:'やまざき てん',      vid:'s7KjD_2BaIg'},
-  {id:'yoshida-ayano',   gen:2, name:'吉田 綾乃クリスティー',ruby:'よしだ あやの くりすてぃー', vid:'5MHf9RVjg9c'},
-  // 3期生
-  {id:'inoue-rina',      gen:3, name:'井上 梨名', ruby:'いのうえ りな',      vid:'zRPdTQ3MMKY'},
-  {id:'endo-riko',       gen:3, name:'遠藤 理子', ruby:'えんどう りこ',      vid:'tnBbAvPfJv8'},
-  {id:'odakura-rena',    gen:3, name:'小田倉 麗奈',ruby:'おだくら れな',     vid:'mD7r8ORdHPo'},
-  {id:'matono-mio',      gen:3, name:'的野 美青', ruby:'まとの みお',        vid:'RaJqFkI0bWw'},
-  {id:'mukai-sumiha',    gen:3, name:'向井 純葉', ruby:'むかい すみは',      vid:'hCzCTdqAT9s'},
-  {id:'murayama-miu',    gen:3, name:'村山 美羽', ruby:'むらやま みう',      vid:'PF3s-JpW8gk'},
-  {id:'morita-hikaru',   gen:3, name:'森田 ひかる',ruby:'もりた ひかる',     vid:'s7KjD_2BaIg'},
-  {id:'yamashita-hizuki',gen:3, name:'山下 瞳月', ruby:'やました ひづき',    vid:'5MHf9RVjg9c'},
-  {id:'yoshida-yuri',    gen:3, name:'吉田 悠李', ruby:'よしだ ゆり',        vid:'zRPdTQ3MMKY'},
-  {id:'watanabe-risa',   gen:3, name:'渡邉 理佐', ruby:'わたなべ りさ',      vid:'tnBbAvPfJv8'},
-  {id:'nakashima-yuzuki',gen:3, name:'中嶋 優月', ruby:'なかしま ゆずき',    vid:'OFPRXTqyGT8'},
-  // 4期生
-  {id:'ishimori-rika',   gen:4, name:'石森 璃花', ruby:'いしもり りか',      vid:'mD7r8ORdHPo'},
-  {id:'otani-kotoha',    gen:4, name:'大谷 琴葉', ruby:'おおたに ことは',    vid:'RaJqFkI0bWw'},
-  {id:'kojima-nagisa',   gen:4, name:'小島 凪紗', ruby:'こじま なぎさ',      vid:'hCzCTdqAT9s'},
-  {id:'sakurada-hiyori', gen:4, name:'桜田 ひより',ruby:'さくらだ ひより',   vid:'OFPRXTqyGT8'},
-  {id:'matoba-airi',     gen:4, name:'的場 愛里', ruby:'まとば あいり',      vid:'PF3s-JpW8gk'},
-  {id:'miki-nina',       gen:4, name:'三期 仁菜', ruby:'みき にな',          vid:'s7KjD_2BaIg'},
-  {id:'miyaji-sumire',   gen:4, name:'宮地 すみれ',ruby:'みやじ すみれ',     vid:'5MHf9RVjg9c'},
-  {id:'muraoka-reina',   gen:4, name:'村岡 嶺奈', ruby:'むらおか れいな',    vid:'zRPdTQ3MMKY'},
-  {id:'moriya-hana',     gen:4, name:'守屋 花菜', ruby:'もりや はな',        vid:'tnBbAvPfJv8'},
+  // ── 2期生 ──
+  {id:'inoue-rina',      gen:2, name:'井上 梨名',    ruby:'いのうえ りな',        img:'inoue.png'},
+  {id:'endo-hikari',     gen:2, name:'遠藤 光莉',    ruby:'えんどう ひかり',      img:'endo_h.png'},
+  {id:'ozono-rei',       gen:2, name:'大園 玲',      ruby:'おおぞの れい',        img:'ozono.png'},
+  {id:'onuma-akiho',     gen:2, name:'大沼 晶保',    ruby:'おおぬま あきほ',      img:'onuma.png'},
+  {id:'kousaka-marino',  gen:2, name:'幸阪 茉里乃',  ruby:'こうさか まりの',      img:'kousaka.png'},
+  {id:'takemoto-yui',    gen:2, name:'武本 唯衣',    ruby:'たけもと ゆい',        img:'takemoto.png'},
+  {id:'tamura-hono',     gen:2, name:'田村 保乃',    ruby:'たむら ほの',          img:'tamura.png'},
+  {id:'huziyosi-karin',  gen:2, name:'藤吉 夏鈴',    ruby:'ふじよし かりん',      img:'huziyosi.png'},
+  {id:'masumoto-kira',   gen:2, name:'増本 綺良',    ruby:'ますもと きら',        img:'masumoto.png'},
+  {id:'matuda-rina',     gen:2, name:'松田 里奈',    ruby:'まつだ りな',          img:'matuda.png'},
+  {id:'morita-hikaru',   gen:2, name:'森田 ひかる',  ruby:'もりた ひかる',        img:'morita.png'},
+  {id:'moriya-rena',     gen:2, name:'守屋 麗奈',    ruby:'もりや れな',          img:'moriya.png'},
+  {id:'yamazaki-ten',    gen:2, name:'山﨑 天',      ruby:'やまざき てん',        img:'yamasaki.png'},
+  // ── 3期生 ──
+  {id:'ishimori-rika',   gen:3, name:'石森 璃花',    ruby:'いしもり りか',        img:'ishimori.png'},
+  {id:'endo-riko',       gen:3, name:'遠藤 理子',    ruby:'えんどう りこ',        img:'endo_r.png'},
+  {id:'odakura-rena',    gen:3, name:'小田倉 麗奈',  ruby:'おだくら れいな',      img:'odakura.png'},
+  {id:'kojima-nagisa',   gen:3, name:'小島 凪紗',    ruby:'こじま なぎさ',        img:'kozima.png'},
+  {id:'taniguti-airi',   gen:3, name:'谷口 愛李',    ruby:'たにぐち あいり',      img:'taniguti.png'},
+  {id:'nakashima-yuzuki',gen:3, name:'中嶋 優月',    ruby:'なかしま ゆずき',      img:'nakasima.png'},
+  {id:'matono-mio',      gen:3, name:'的野 美青',    ruby:'まとの みお',          img:'matono.png'},
+  {id:'mukai-itoha',     gen:3, name:'向井 純葉',    ruby:'むかい いとは',        img:'mukai.png'},
+  {id:'murai-yu',        gen:3, name:'村井 優',      ruby:'むらい ゆう',          img:'murai.png'},
+  {id:'murayama-miu',    gen:3, name:'村山 美羽',    ruby:'むらやま みう',        img:'murayama.png'},
+  {id:'yamashita-shizuki',gen:3,name:'山下 瞳月',    ruby:'やました しづき',      img:'yamasita.png'},
+  // ── 4期生 ──
+  {id:'asai-konomi',     gen:4, name:'浅井 恋乃未',  ruby:'あさい このみ',        img:'asai.png'},
+  {id:'inaguma-hina',    gen:4, name:'稲熊 ひな',    ruby:'いなぐま ひな',        img:'inaguma.png'},
+  {id:'katumata-haru',   gen:4, name:'勝又 春',      ruby:'かつまた はる',        img:'katumata.png'},
+  {id:'satou-neo',       gen:4, name:'佐藤 愛桜',    ruby:'さとう ねお',          img:'sato.png'},
+  {id:'nakagawa-tihiro', gen:4, name:'中川 智尋',    ruby:'なかがわ ちひろ',      img:'nakagawa.png'},
+  {id:'matumoto-wako',   gen:4, name:'松本 和子',    ruby:'まつもと わこ',        img:'matumoto.png'},
+  {id:'meguro-hiiro',    gen:4, name:'目黒 陽色',    ruby:'めぐろ ひいろ',        img:'meguro.png'},
+  {id:'yamakawa-ui',     gen:4, name:'山川 宇衣',    ruby:'やまかわ うい',        img:'yamakawa.png'},
+  {id:'yamada-momomi',   gen:4, name:'山田 桃実',    ruby:'やまだ ももみ',        img:'yamada.png'},
 ];
 
 const BADGE={2:'badge-2',3:'badge-3',4:'badge-4'};
@@ -128,7 +137,7 @@ function render(filter){
   document.getElementById('memberGrid').innerHTML=list.map(m=>`
     <a href="member_detail.html?id=${m.id}" class="member-card">
       <div class="member-photo">
-        <img src="https://img.youtube.com/vi/${m.vid}/mqdefault.jpg" alt="${m.name}" draggable="false">
+        <img src="${IMG}${m.img}" alt="${m.name}" draggable="false">
         <span class="member-gen-badge ${BADGE[m.gen]}">${m.gen}期</span>
       </div>
       <div class="member-info">
