@@ -133,18 +133,29 @@ const BADGE={2:'badge-2',3:'badge-3',4:'badge-4'};
 const ACTIVE_CLS={all:'active-all',2:'active-2',3:'active-3',4:'active-4'};
 
 function render(filter){
-  const list=filter==='all'?members:members.filter(m=>m.gen==filter);
-  document.getElementById('memberGrid').innerHTML=list.map(m=>`
-    <a href="member_detail.html?id=${m.id}" class="member-card">
-      <div class="member-photo">
-        <img src="${IMG}${m.img}" alt="${m.name}" draggable="false">
-        <span class="member-gen-badge ${BADGE[m.gen]}">${m.gen}期</span>
-      </div>
-      <div class="member-info">
-        <p class="member-name">${m.name}</p>
-        <p class="member-ruby">${m.ruby}</p>
-      </div>
-    </a>`).join('');
+  const list = filter==='all'
+    ? members
+    : members.filter(m=>m.gen==filter);
+
+  document.getElementById('memberGrid').innerHTML =
+    list.map(m=>{
+
+      // 拡張子を削除（ozono.png → ozono）
+      const baseName = m.img.replace(/\.[^/.]+$/, "");
+
+      return `
+        <a href="profile_${baseName}.html" class="member-card">
+          <div class="member-photo">
+            <img src="${IMG}${m.img}" alt="${m.name}" draggable="false">
+            <span class="member-gen-badge ${BADGE[m.gen]}">${m.gen}期</span>
+          </div>
+          <div class="member-info">
+            <p class="member-name">${m.name}</p>
+            <p class="member-ruby">${m.ruby}</p>
+          </div>
+        </a>
+      `;
+    }).join('');
 }
 
 document.getElementById('genTabs').addEventListener('click',e=>{
